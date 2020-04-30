@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>{{orderSuccess()}}</h2>
+<div mat-dialog-content *ngIf="orderId">
+  <h3>Your order number: #{{orderId}}</h3>
+  <h3>Thank you for purchase!:)</h3>
+</div>
+<mat-card-actions>
+  <button mat-raised-button (click)="closeDialog()">Ok</button>
+</mat-card-actions>

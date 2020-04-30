@@ -1,0 +1,61 @@
+<mat-tab-group dynamicHeight>
+  <mat-tab label="Sign up">
+<form novalidate (keydown.enter)="$event.target.tagName == 'TEXTAREA'" (ngSubmit)="registration()" class="signUpForm">
+  <div mat-dialog-content class="dialogContent">
+    <mat-form-field>
+      <input matInput placeholder="Username" name="registrationUsername" type="text" [(ngModel)]="regForm.username" [formControl]="usernameFormControl">
+      <mat-icon matSuffix>alternate_email</mat-icon>
+      <mat-error *ngIf="usernameFormControl.invalid">{{passwordGetErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Password" name="registrationPassword" type="password" [(ngModel)]="regForm.password" [formControl]="passwordFormControl">
+      <mat-icon matSuffix>vpn_key</mat-icon>
+      <mat-error *ngIf="passwordFormControl.invalid">{{usernameGetErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Name" name="registrationName" type="text" [(ngModel)]="regForm.name" [formControl]="nameFormControl">
+      <mat-icon matSuffix>person</mat-icon>
+      <mat-error *ngIf="nameFormControl.invalid">{{nameGetErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Phone number" name="registrationPhone" type="text" [(ngModel)]="regForm.phoneNumber"
+             [formControl]="phoneFormControl" >
+      <mat-icon matSuffix>local_phone</mat-icon>
+      <mat-hint>For example: +375 (29) 123-12-31</mat-hint>
+      <mat-error *ngIf="phoneFormControl.invalid">{{phoneGetErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Shipping address" name="registrationShippingAddress" type="text" [(ngModel)]="regForm.shippingAddress"
+             [formControl]="addressFormControl">
+      <mat-icon matSuffix>location_city</mat-icon>
+      <mat-error>{{addressGetErrorMessage()}}</mat-error>
+    </mat-form-field>
+  </div>
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" type="submit"
+            [disabled]="phoneFormControl.invalid || nameFormControl.invalid
+            || addressFormControl.invalid || usernameFormControl.invalid
+            || passwordFormControl.invalid">Sign up</button>
+  </mat-dialog-actions>
+</form>
+  </mat-tab>
+  <mat-tab label="Login">
+    <form novalidate (keydown.enter)="$event.target.tagName == 'TEXTAREA'" (ngSubmit)="login()" class="signUpForm">
+      <div mat-dialog-content class="dialogContent">
+        <mat-form-field>
+          <input matInput placeholder="Username" name="registrationUsername" type="text" [(ngModel)]="logForm.username" [formControl]="usernameFormControl">
+          <mat-icon matSuffix>alternate_email</mat-icon>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Password" name="registrationPassword" type="password" [(ngModel)]="logForm.password" [formControl]="passwordFormControl">
+          <mat-icon matSuffix>vpn_key</mat-icon>
+        </mat-form-field>
+      </div>
+      <mat-dialog-actions>
+        <button mat-raised-button color="primary" type="submit"
+                [disabled]="usernameFormControl.invalid
+            || passwordFormControl.invalid">Login</button>
+      </mat-dialog-actions>
+    </form>
+  </mat-tab>
+</mat-tab-group>

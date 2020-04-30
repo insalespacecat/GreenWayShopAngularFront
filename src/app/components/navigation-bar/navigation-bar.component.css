@@ -1,0 +1,17 @@
+.toolbar{
+  display: flex;
+  justify-content: center;
+}
+.navButton{
+  margin: 33px;
+  width: 200px;
+}
+.headerImage{
+  height: 240px;
+  width: 800px;
+}
+.matCardHeader{
+  display: flex;
+  justify-content: center;
+}
+

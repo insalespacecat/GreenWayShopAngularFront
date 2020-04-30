@@ -1,0 +1,18 @@
+.cartMatCard{
+  width: 260px;
+  height: 350px;
+  position: fixed;
+  top: 330px;
+  left: 20px;
+}
+.cartMatCardActions{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.total {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+

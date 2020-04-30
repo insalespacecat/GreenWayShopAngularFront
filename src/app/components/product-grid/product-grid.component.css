@@ -1,0 +1,12 @@
+.productGrid{
+  display: flex;
+  justify-content: center;
+}
+.showCartButton{
+  width: 295px;
+  height: 40px;
+  position: fixed;
+  top: 720px;
+  left: 20px;
+}
+

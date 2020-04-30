@@ -1,0 +1,13 @@
+.dialogContent{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+.radioPaymethodInput{
+  display: flex;
+  flex-direction: column;
+}
+input{
+  margin: 5px;
+}
