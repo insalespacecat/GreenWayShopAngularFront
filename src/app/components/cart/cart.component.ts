@@ -7,6 +7,7 @@ import {OrderInterface} from '../../interfaces/order-interface';
 import {OrderService} from '../../services/order.service';
 import {OrderResultDialogComponent} from '../order-result-dialog/order-result-dialog.component';
 import {Router} from '@angular/router';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-cart',
@@ -16,14 +17,14 @@ import {Router} from '@angular/router';
 export class CartComponent implements DoCheck {
   total = 0;
   info: OrderInterface = {id: null, name: null, items: null, paymentMethod: null, address: null, phoneNumber: null,
-                              total: null};
+                              total: null, user: this.authService.user};
   orderData: OrderInterface = {id: null, name: null, items: null, paymentMethod: null, address: null, phoneNumber: null,
-                                  total: null};
+                                  total: null, user: this.authService.user};
   orderResult: any = null;
   discount: number;
   paymentMethod: any;
   constructor(public cartService: CartService, private orderService: OrderService,  private orderDialog: MatDialog,
-              private router: Router) {
+              private router: Router, private authService: AuthService) {
   }
   openOrderDialog(): void {
     this.info.items = this.cartService.get();
@@ -47,7 +48,7 @@ export class CartComponent implements DoCheck {
           this.cartService.deleteSync();
           this.info = {
             id: null, name: null, items: null, paymentMethod: null, address: null, phoneNumber: null,
-            total: null
+            total: null, user: this.authService.user
           };
           this.router.navigateByUrl('/thankYou');
         }

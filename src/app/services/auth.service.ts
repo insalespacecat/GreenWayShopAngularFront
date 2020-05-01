@@ -35,17 +35,18 @@ export class AuthService {
     {
       'Content-Type': 'application/x-www-form-urlencoded',
       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-      'Accept-Language': 'ru-RU,ru;q=0.9,en-US,en;q=0.5',
-      'Origin': "https://localhost:8443/"
+      'Accept-Language': 'ru-RU,ru;q=0.9,en-US,en;q=0.5'
     }, withCredentials: true})
       .subscribe(res => this.loginResult = res);
+    console.log('API returned user ' + JSON.stringify(this.user));
   }
-    getUserInfo() {
+  getUserInfo() {
       this.http.get<UserInterface>(this.APIURL + '/userInfoForSession', {withCredentials: true})
         .subscribe(userData => {
           this.user = userData;
           console.log('Logged in user: ' + JSON.stringify(this.user));
         });
+      return this.user;
     }
   /*
     /*

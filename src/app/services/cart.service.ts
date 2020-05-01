@@ -11,6 +11,7 @@ export class CartService {
   cartTotalPrice = 0;
   itemIndex: number;
   cartAPIURL = 'https://localhost:8443/cart';
+  cartAPIAuthenticated = 'https://localhost:8443/authenticated/cart';
   postSyncResult: any;
   firstProductExists = false;
   constructor(private http: HttpClient) { }

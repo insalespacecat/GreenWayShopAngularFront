@@ -1,4 +1,5 @@
 import {CartItemInterface} from './cart-item-interface';
+import {UserInterface} from './user-interface';
 
 export interface OrderInterface {
   id: number;
@@ -8,4 +9,5 @@ export interface OrderInterface {
   address: string;
   phoneNumber: string;
   paymentMethod: string;
+  user: UserInterface;
 }
