@@ -5,7 +5,6 @@ import {MatDialog} from '@angular/material/dialog';
 import {OrderDialogComponent} from '../order-dialog/order-dialog.component';
 import {OrderInterface} from '../../interfaces/order-interface';
 import {OrderService} from '../../services/order.service';
-import {OrderResultDialogComponent} from '../order-result-dialog/order-result-dialog.component';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 
@@ -21,7 +20,7 @@ export class CartComponent implements DoCheck {
   orderData: OrderInterface = {id: null, name: null, items: null, paymentMethod: null, address: null, phoneNumber: null,
                                   total: null, user: this.authService.user};
   orderResult: any = null;
-  discount: number;
+  discount: number = null;
   paymentMethod: any;
   constructor(public cartService: CartService, private orderService: OrderService,  private orderDialog: MatDialog,
               private router: Router, private authService: AuthService) {
@@ -29,6 +28,7 @@ export class CartComponent implements DoCheck {
   openOrderDialog(): void {
     this.info.items = this.cartService.get();
     this.info.total  = this.cartService.getTotalPrice();
+    this.info.discount = this.discount;
     if (this.info.total > 0) {
       const dialogConfig = {
         width: '250px',
@@ -55,7 +55,23 @@ export class CartComponent implements DoCheck {
       });
     }
   }
+  discountPresented() {
+    return this.discount !== null;
+  }
+
+  getTotal() {
+    if (this.discountPresented()) {
+      return (this.total - this.info.total / 100 * this.discount);
+    }
+    return this.total;
+  }
+  getDiscountInMoney() {
+    return (this.total  / 100 * this.discount);
+  }
   ngDoCheck(): void {
     this.total = this.cartService.getTotalPrice();
+    if (this.authService.getLoginStatusFromSessionStorage()) {
+      this.discount = this.authService.getUserInfoFromSessionStorage().discount;
+    }
   }
 }

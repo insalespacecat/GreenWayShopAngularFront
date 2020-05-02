@@ -13,6 +13,7 @@ import {LoginFormInterface} from '../../interfaces/login-form-interface';
 export class AuthDialogComponent implements OnInit {
   regForm: RegistrationFormInterface = {name: null, username: null, password: null, shippingAddress: null, phoneNumber: null};
   logForm: LoginFormInterface = {username: null, password: null};
+  showLoginErrorMessage = false;
   usernameFormControl = new FormControl('', [Validators.required, Validators.maxLength(20)]);
   passwordFormControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
   phoneFormControl = new FormControl('', [Validators.required, Validators.pattern('^\\+375 \\((17|29|33|44|25)\\) [0-9]{3}-[0-9]{2}-[0-9]{2}$')]);
@@ -67,9 +68,22 @@ export class AuthDialogComponent implements OnInit {
     this.authService.registration(this.regForm);
     this.dialogRef.close();
   }
+  getAuthenticationStatus() {
+    return this.authService.getLoginStatusFromSessionStorage();
+  }
+  loginError() {
+    return this.showLoginErrorMessage;
+  }
   login() {
     this.authService.login(this.logForm);
-    this.authService.getUserInfo();
+    this.authService.loadUserInfoFromAPI();
+    console.log('auth status in auth dialog is ' + this.getAuthenticationStatus());
+    if (!this.getAuthenticationStatus()) {
+      this.showLoginErrorMessage = true;
+    } else {
+      this.showLoginErrorMessage = false;
+      this.dialogRef.close();
+    }
     this.dialogRef.close();
   }
   ngOnInit(): void {

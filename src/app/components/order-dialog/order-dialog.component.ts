@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {OrderInterface} from '../../interfaces/order-interface';
 import {CartService} from '../../services/cart.service';
 import {Form, FormBuilder, FormControl, Validators} from '@angular/forms';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-order-dialog',
@@ -12,11 +13,12 @@ import {Form, FormBuilder, FormControl, Validators} from '@angular/forms';
 export class OrderDialogComponent implements OnInit {
   info: OrderInterface = Object.assign({}, this.data.orderInfo);
   paymentMethod: any = null;
+  discount: number = this.info.discount;
   phoneFromControl = new FormControl('', [Validators.required, Validators.pattern('^\\+375 \\((17|29|33|44|25)\\) [0-9]{3}-[0-9]{2}-[0-9]{2}$')]);
   nameFormControl = new FormControl('', [Validators.required, Validators.maxLength(30)]);
   addressFormControl = new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]);
   constructor(public dialogRef: MatDialogRef<OrderDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any, formBuilder: FormBuilder) {
+              @Inject(MAT_DIALOG_DATA) public data: any) {
   }
   phoneGetErrorMessage() {
     if (this.phoneFromControl.hasError('required')) {
@@ -49,9 +51,22 @@ export class OrderDialogComponent implements OnInit {
     return this.paymentMethod != null;
   }
   onSubmit() {
+    this.info.total = this.getTotal();
     this.data.orderInfo = Object.assign({}, this.info);
     this.data.orderInfo.paymentMethod = this.paymentMethod;
     this.dialogRef.close(this.data);
+  }
+  discountPresented() {
+    return this.discount === null;
+  }
+  getTotal() {
+    if (this.discountPresented()) {
+      return (this.info.total - this.info.total / 100 * this.discount);
+    }
+    return this.info.total;
+  }
+  getDiscountInMoney() {
+    return (this.info.total  / 100 * this.discount);
   }
   ngOnInit(): void {
   }

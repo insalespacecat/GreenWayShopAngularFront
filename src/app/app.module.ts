@@ -28,6 +28,10 @@ import {MatIconModule} from '@angular/material/icon';
 import { QuantityPostfixPipe } from './pipes/quantityPostfix.pipe';
 import { AuthDialogComponent } from './components/auth-dialog/auth-dialog.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { LogoutConfirmationDialogComponent } from './components/logout-confirmation-dialog/logout-confirmation-dialog.component';
+import { MyAccountComponent } from './components/my-account/my-account.component';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -42,6 +46,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     OrderConfirmedComponent,
     QuantityPostfixPipe,
     AuthDialogComponent,
+    LogoutConfirmationDialogComponent,
+    MyAccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +67,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     AppRoutes,
     MatIconModule,
     ReactiveFormsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDividerModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -20,14 +20,15 @@
       <mat-error>{{addressGetErrorMessage()}}</mat-error>
     </mat-form-field>
       <h3>I will pay with:</h3>
-    <mat-form-field>
     <mat-radio-group [(ngModel)]="paymentMethod" [ngModelOptions]="{standalone: true}" class="radioPaymethodInput">
         <mat-radio-button value="creditCard" >Credit card</mat-radio-button><br/>
 
         <mat-radio-button value="cash">Cash</mat-radio-button>
     </mat-radio-group>
-    </mat-form-field>
-    <h3 class="total"> Total: {{info.total | currency : 'USD' : 'symbol' : '.2'}}</h3>
+    <h3 class="total"> Total: {{getTotal() | currency : 'USD' : 'symbol' : '.2'}}</h3><br/>
+    <h3 class="total" *ngIf="discountPresented()"><b> Your discount:
+      {{getDiscountInMoney() | currency: 'USD' : 'symbol' : '.2'}}</b>
+    </h3>
   </div>
   <mat-dialog-actions>
     <button mat-raised-button color="primary" type="submit"

@@ -4,7 +4,10 @@
   </mat-card-header>
   <mat-card-content class="cartMatCardContent">
   <ng-content></ng-content>
-    <h3 class="total"> Total: {{total | currency: 'USD' : 'symbol' : '.2'}}</h3>
+    <div class="total">
+    <h3> Total: {{getTotal() | currency: 'USD' : 'symbol' : '.2'}}</h3>
+    <h3 *ngIf="discountPresented()"><b>-{{getDiscountInMoney() | currency: 'USD' : 'symbol' : '.2'}}</b></h3>
+    </div>
   </mat-card-content>
   <mat-card-actions class="cartMatCardActions">
     <button mat-raised-button class="orderButton" color="primary" (click)="openOrderDialog()">Order</button>

@@ -50,6 +50,7 @@
           <input matInput placeholder="Password" name="registrationPassword" type="password" [(ngModel)]="logForm.password" [formControl]="passwordFormControl">
           <mat-icon matSuffix>vpn_key</mat-icon>
         </mat-form-field>
+        <mat-chip color="warn" *ngIf="loginError()">Please, check your credentials and try again.</mat-chip>
       </div>
       <mat-dialog-actions>
         <button mat-raised-button color="primary" type="submit"
