@@ -7,61 +7,73 @@ import {OrderInterface} from '../../interfaces/order-interface';
 import {OrderService} from '../../services/order.service';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
+import {UserInterface} from "../../interfaces/user-interface";
+import {PurchaseProcessService} from "../../services/purchase-process.service";
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent implements DoCheck {
+//CartComponent's logic is responsible for preparation of cart information and shipping of it into the order dialog
+//CartContentComponent is responsible for showing cart's body in the view, it is placed in CartComponent using <ng-content>
+
+//So CartComponent's logic is concentrated on ORDER button. Order button here should open OrderDialog.
+//openOrderDialog() assembles order object and ships it in order dialog, after order dialog closing,
+//if dialog returns true, cart is deleted and user is navigated on /thankYou page
+export class CartComponent implements DoCheck, OnInit {
+
+  //This component requires userInfo, so it consumes it from sessionStorage using authService onInit and
+  //uses the local variable. If there is no user storage, then variable is to be initialized with nulls
+  userInfo: UserInterface;
+
   total = 0;
-  info: OrderInterface = {id: null, name: null, items: null, paymentMethod: null, address: null, phoneNumber: null,
-                              total: null, user: this.authService.user};
-  orderData: OrderInterface = {id: null, name: null, items: null, paymentMethod: null, address: null, phoneNumber: null,
-                                  total: null, user: this.authService.user};
+  order: OrderInterface = {id: null, name: null, items: null, paymentMethod: null, address: null, phoneNumber: null, total: null,
+    user: this.authService.getUserInfoFromSessionStorage(), discount: this.authService.getUserInfoFromSessionStorage().discount};
+
   orderResult: any = null;
   discount: number = null;
-  paymentMethod: any;
-  constructor(public cartService: CartService, private orderService: OrderService,  private orderDialog: MatDialog,
+
+  constructor(public purchaseProcessService: PurchaseProcessService, private orderDialog: MatDialog,
               private router: Router, private authService: AuthService) {
   }
+
   openOrderDialog(): void {
-    this.info.items = this.cartService.get();
-    this.info.total  = this.cartService.getTotalPrice();
-    this.info.discount = this.discount;
-    if (this.info.total > 0) {
+    console.log('openOrderDialog is executed');
+    this.order.items = this.purchaseProcessService.getCart();
+    this.order.total  = this.purchaseProcessService.getTotalPrice();
+    this.order.discount = this.discount;
+
+    if (this.order.total > 0) {
       const dialogConfig = {
         width: '250px',
-        data: {orderInfo: this.info}
+        data: {orderInfo: this.order}
       };
       const orderDialogRef = this.orderDialog.open(OrderDialogComponent, dialogConfig);
-
+      console.log('dialog is opened');
       orderDialogRef.afterClosed().subscribe(result => {
-        this.orderData = result.orderInfo;
-        if (this.orderData) {
-          console.log('sending order ' + JSON.stringify(this.orderData));
-          this.orderService.placeOrder(this.orderData).subscribe(
-            res => {
-              this.orderResult = res;
-            }
-          );
-          this.cartService.deleteSync();
-          this.info = {
+        this.orderResult = result;
+        //true is expected form order dialog. Means successful order and cart is to be deleted.
+        if (this.orderResult) {
+          this.purchaseProcessService.deleteSync();
+          this.order = {
             id: null, name: null, items: null, paymentMethod: null, address: null, phoneNumber: null,
-            total: null, user: this.authService.user
+            total: null, user: this.authService.getUserInfoFromSessionStorage(), discount: this.authService.getUserInfoFromSessionStorage().discount
           };
           this.router.navigateByUrl('/thankYou');
         }
       });
     }
   }
+
+
+
   discountPresented() {
     return this.discount !== null;
   }
-
   getTotal() {
     if (this.discountPresented()) {
-      return (this.total - this.info.total / 100 * this.discount);
+      return (this.total - this.order.total / 100 * this.discount);
     }
     return this.total;
   }
@@ -69,9 +81,12 @@ export class CartComponent implements DoCheck {
     return (this.total  / 100 * this.discount);
   }
   ngDoCheck(): void {
-    this.total = this.cartService.getTotalPrice();
+    this.total = this.purchaseProcessService.getTotalPrice();
     if (this.authService.getLoginStatusFromSessionStorage()) {
       this.discount = this.authService.getUserInfoFromSessionStorage().discount;
     }
+  }
+  ngOnInit(): void {
+    this.userInfo = this.authService.getUserInfoFromSessionStorage();
   }
 }

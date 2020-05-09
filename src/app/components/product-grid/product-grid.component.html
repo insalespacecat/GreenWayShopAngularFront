@@ -1,18 +1,21 @@
 <br/>
-<mat-grid-list class="productGrid" cols="5" rowHeight="400px">
-  <mat-grid-tile>
-    <div class="Cart" [@fade]="cartHidden ? 'hidden' : 'shown'">
+<mat-grid-list class="productGrid" cols="5" rowHeight="1:2">
+
+  <mat-grid-tile class="cartTile">
+      <div class="Cart">
       <app-cart>
         <app-cart-content></app-cart-content>
       </app-cart>
-    </div>
-    <button mat-raised-button class="showCartButton" color="primary" (click)="hideShowCart()">Cart</button>
+      </div>
   </mat-grid-tile>
+
   <mat-grid-tile *ngFor="let productInfo of productInfoList">
     <app-product-card [productInfo]="productInfo"></app-product-card>
   </mat-grid-tile>
+
   <mat-grid-tile></mat-grid-tile>
   <mat-grid-tile></mat-grid-tile>
+
   <mat-grid-tile *ngFor="let productInfo of productInfoList">
     <app-product-card [productInfo]="productInfo"></app-product-card>
   </mat-grid-tile>

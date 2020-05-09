@@ -31,7 +31,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { LogoutConfirmationDialogComponent } from './components/logout-confirmation-dialog/logout-confirmation-dialog.component';
 import { MyAccountComponent } from './components/my-account/my-account.component';
 import {MatDividerModule} from '@angular/material/divider';
-import {MatChipsModule} from '@angular/material/chips';
+import {MAT_CHIPS_DEFAULT_OPTIONS, MatChipsModule} from '@angular/material/chips';
+import {COMMA, ENTER} from "@angular/cdk/keycodes";
 
 @NgModule({
   declarations: [
@@ -71,7 +72,7 @@ import {MatChipsModule} from '@angular/material/chips';
     MatDividerModule,
     MatChipsModule
   ],
-  providers: [],
+  providers:[],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

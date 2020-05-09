@@ -1,37 +1,27 @@
-<form novalidate (keydown.enter)="$event.target.tagName == 'TEXTAREA'" (ngSubmit)="onSubmit()">
+<form novalidate (keydown.enter)="$event.target.tagName == 'TEXTAREA'" (ngSubmit)="onSubmit()" [formGroup]="formGroup">
   <h2 mat-dialog-title>Place an order</h2>
   <div mat-dialog-content class="dialogContent">
     <mat-form-field>
-      <input matInput placeholder="Name" name="orderName" type="text" [(ngModel)]="info.name" [formControl]="nameFormControl">
+      <input matInput placeholder="Name" name="orderName" type="text" [(ngModel)]="info.name" formControlName="nameFormControl">
       <mat-icon matSuffix>person</mat-icon>
-      <mat-error *ngIf="nameFormControl.invalid">{{nameGetErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Phone number" name="orderPhone" type="text" [(ngModel)]="info.phoneNumber"
-             [formControl]="phoneFromControl" >
+      <input matInput placeholder="Phone number" name="orderPhone" type="text" [(ngModel)]="info.phoneNumber" formControlName="phoneFormControl">
       <mat-icon matSuffix>local_phone</mat-icon>
       <mat-hint>For example: +375 (29) 123-12-31</mat-hint>
-      <mat-error *ngIf="phoneFromControl.invalid">{{phoneGetErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Shipping address" name="orderShippingAddress" type="text" [(ngModel)]="info.address"
-              [formControl]="addressFormControl">
+      <input matInput placeholder="Shipping address" name="orderShippingAddress" type="text" [(ngModel)]="info.address" formControlName="addressFormControl">
       <mat-icon matSuffix>location_city</mat-icon>
-      <mat-error>{{addressGetErrorMessage()}}</mat-error>
     </mat-form-field>
       <h3>I will pay with:</h3>
-    <mat-radio-group [(ngModel)]="paymentMethod" [ngModelOptions]="{standalone: true}" class="radioPaymethodInput">
+    <mat-radio-group [(ngModel)]="paymentMethod" [ngModelOptions]="{standalone: true}" class="radioPaymentMethodInput">
         <mat-radio-button value="creditCard" >Credit card</mat-radio-button><br/>
-
         <mat-radio-button value="cash">Cash</mat-radio-button>
     </mat-radio-group>
-    <h3 class="total"> Total: {{getTotal() | currency : 'USD' : 'symbol' : '.2'}}</h3><br/>
-    <h3 class="total" *ngIf="discountPresented()"><b> Your discount:
-      {{getDiscountInMoney() | currency: 'USD' : 'symbol' : '.2'}}</b>
-    </h3>
   </div>
   <mat-dialog-actions>
     <button mat-raised-button color="primary" type="submit"
-            [disabled]="phoneFromControl.invalid || nameFormControl.invalid || addressFormControl.invalid || paymentMethodChecked()">Order</button>
+            [disabled]="formGroup.invalid">Order</button>
   </mat-dialog-actions>
 </form>

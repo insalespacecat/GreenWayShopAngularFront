@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="cartBody" class="cartContentTable">
+<table mat-table [dataSource]="this.cartBody" class="cartContentTable">
   <ng-container matColumnDef="itemName">
     <td mat-cell *matCellDef="let itemInCart" class="itemNameCell">{{itemInCart.name}} </td>
   </ng-container>
@@ -9,12 +9,12 @@
     <td mat-cell class="priceCell"  *matCellDef="let itemInCart">{{itemInCart.price | currency: 'USD': 'symbol':'.2'}}</td>
   </ng-container>
   <ng-container matColumnDef="deleteButtons">
-    <td mat-cell class="deleteButton" *matCellDef="let index">
-      <button mat-icon-button class="deleteButton" (click)="deleteItem(index)">
+    <td mat-cell class="deleteButton" *matCellDef="let item">
+      <button mat-icon-button class="deleteButton" (click)="deleteItem(item)">
       <mat-icon class="deleteIcon">close</mat-icon>
     </button>
     </td>
   </ng-container>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<h2 *ngIf="discount" class="discount">Your discount is {{discount | currency: 'USD': 'symbol': '.2'}}</h2>
+

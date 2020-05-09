@@ -21,25 +21,30 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
       ])
   ]
 })
-export class ProductGridComponent implements OnInit, DoCheck {
+export class ProductGridComponent implements OnInit {
   productInfoList: Array<ProductInterface>;
   cartHidden = true;
   constructor(private productService: ProductService, private cartService: CartService) { }
+  /*
   hideShowCart() {
     this.cartHidden = !this.cartHidden;
   }
+
   ngDoCheck(): void {
     if (this.cartService.firstProductAdded()) {
       console.log('First product added');
       this.cartHidden = false;
     }
+
   }
+   */
   ngOnInit(): void {
     this.productService.getProducts().subscribe(res => this.productInfoList = res);
-    if (this.cartService.hasProducts()) {
+    /*if (this.cartService.hasProducts()) {
       console.log('Cart has products');
       this.cartHidden = false;
     }
-    JSON.stringify(this.productInfoList);
+     */
+   // JSON.stringify(this.productInfoList);
   }
 }

@@ -1,7 +1,8 @@
-import {Component, DoCheck, OnInit} from '@angular/core';
+import {Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ProductInterface} from '../../interfaces/product-interface';
 import {CartService} from '../../services/cart.service';
 import {CartItemInterface} from '../../interfaces/cart-item-interface';
+import {PurchaseProcessService} from "../../services/purchase-process.service";
 
 @Component({
   selector: 'app-cart-content',
@@ -9,22 +10,31 @@ import {CartItemInterface} from '../../interfaces/cart-item-interface';
   styleUrls: ['./cart-content.component.css']
 })
 export class CartContentComponent implements OnInit, DoCheck {
+
   displayedColumns: string[] = ['itemName', 'itemQuantity', 'itemPrice', 'deleteButtons'];
-  cartBody: Array<CartItemInterface>;
+  cartBody;
   discount;
-  constructor(private cartService: CartService) { }
-  deleteItem(index: number) {
-    this.cartService.remove(index);
-    this.cartBody = this.cartService.get();
+
+  constructor(private purchaseProcessService: PurchaseProcessService) { }
+
+
+  deleteItem(item) {
+    console.log('delete item is executed');
+    this.purchaseProcessService.deleteItemFromCart(item);
+    this.cartBody = this.purchaseProcessService.getCart();
   }
+
   ngOnInit(): void {
-    this.cartService.getSync();
-    this.cartBody = this.cartService.get();
+    this.purchaseProcessService.getSync();
+    this.cartBody = this.purchaseProcessService.getCart();
   }
 
   ngDoCheck(): void {
-    this.cartBody = this.cartService.get();
-    console.log(JSON.stringify(this.cartBody));
-  }
 
+    if(JSON.stringify(this.cartBody) !== JSON.stringify(this.purchaseProcessService.getCart())) {
+      this.cartBody = this.purchaseProcessService.getCart();
+      console.log('CB !== PPS.GC')
+    }
+    console.log('cart body in cartContent is ' + JSON.stringify(this.cartBody));
+  }
 }

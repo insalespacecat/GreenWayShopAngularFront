@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {RegistrationFormInterface} from '../../interfaces/registration-form-interface';
 import {AuthService} from '../../services/auth.service';
@@ -10,17 +10,60 @@ import {LoginFormInterface} from '../../interfaces/login-form-interface';
   templateUrl: './auth-dialog.component.html',
   styleUrls: ['./auth-dialog.component.css']
 })
-export class AuthDialogComponent implements OnInit {
-  regForm: RegistrationFormInterface = {name: null, username: null, password: null, shippingAddress: null, phoneNumber: null};
-  logForm: LoginFormInterface = {username: null, password: null};
-  showLoginErrorMessage = false;
+export class AuthDialogComponent {
+
+  //Forms for ngModel
+  registrationForm: RegistrationFormInterface = {name: null, username: null, password: null, shippingAddress: null, phoneNumber: null};
+  loginForm: LoginFormInterface = {username: null, password: null};
+
+  //Variables consumed by ngIf to show error messages
+  loginSuccess: boolean = true;
+  registrationSuccess: boolean = true;
+
+  formGroupRegistration = new FormGroup({
+  usernameFormControl: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+  passwordFormControl: new FormControl('', [Validators.required, Validators.minLength(6)]),
+  phoneFormControl: new FormControl('', [Validators.required, Validators.pattern('^\\+375 \\((17|29|33|44|25)\\) [0-9]{3}-[0-9]{2}-[0-9]{2}$')]),
+  nameFormControl: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+  addressFormControl: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]),
+  });
+
+  formGroupLogin = new FormGroup({
+    usernameFormControl: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+    passwordFormControl: new FormControl('', [Validators.required, Validators.minLength(6)]),
+  });
+
+  constructor(public dialogRef: MatDialogRef<AuthDialogComponent>, public authService: AuthService) {
+  }
+
+
+
+  //Triggers for authService reg and auth methods
+  initRegistrationProcess() {
+    this.registrationSuccess = this.authService.registration(this.registrationForm);
+    if(this.registrationSuccess){
+    this.dialogRef.close();
+    }
+  }
+  initLoginProcess(){
+    this.authService.login(this.loginForm);
+    this.dialogRef.close();
+  }
+
+}
+
+/*
+ //This syntactic madness here because of custom error messages
+  //that (probably) cannot be shown with FormGroup sugar provider
   usernameFormControl = new FormControl('', [Validators.required, Validators.maxLength(20)]);
   passwordFormControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
   phoneFormControl = new FormControl('', [Validators.required, Validators.pattern('^\\+375 \\((17|29|33|44|25)\\) [0-9]{3}-[0-9]{2}-[0-9]{2}$')]);
   nameFormControl = new FormControl('', [Validators.required, Validators.maxLength(30)]);
   addressFormControl = new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]);
-  constructor(public dialogRef: MatDialogRef<AuthDialogComponent>, private authService: AuthService) {
-  }
+
+
+
+  //Stay calm:))))))))
   usernameGetErrorMessage() {
     if (this.usernameFormControl.hasError('required')) {
       return 'Please, enter your username';
@@ -64,28 +107,4 @@ export class AuthDialogComponent implements OnInit {
       return 'Sorry, your address is too long';
     }
   }
-  registration() {
-    this.authService.registration(this.regForm);
-    this.dialogRef.close();
-  }
-  getAuthenticationStatus() {
-    return this.authService.getLoginStatusFromSessionStorage();
-  }
-  loginError() {
-    return this.showLoginErrorMessage;
-  }
-  login() {
-    this.authService.login(this.logForm);
-    this.authService.loadUserInfoFromAPI();
-    console.log('auth status in auth dialog is ' + this.getAuthenticationStatus());
-    if (!this.getAuthenticationStatus()) {
-      this.showLoginErrorMessage = true;
-    } else {
-      this.showLoginErrorMessage = false;
-      this.dialogRef.close();
-    }
-    this.dialogRef.close();
-  }
-  ngOnInit(): void {
-  }
-}
+ */
