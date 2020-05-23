@@ -1,7 +1,4 @@
 import {Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {ProductInterface} from '../../interfaces/product-interface';
-import {CartService} from '../../services/cart.service';
-import {CartItemInterface} from '../../interfaces/cart-item-interface';
 import {PurchaseProcessService} from "../../services/purchase-process.service";
 
 @Component({

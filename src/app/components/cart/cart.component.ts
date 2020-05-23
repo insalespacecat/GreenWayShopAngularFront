@@ -1,10 +1,9 @@
-import {Component, DoCheck, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, DoCheck, OnInit} from '@angular/core';
 
-import {CartService} from '../../services/cart.service';
 import {MatDialog} from '@angular/material/dialog';
 import {OrderDialogComponent} from '../order-dialog/order-dialog.component';
 import {OrderInterface} from '../../interfaces/order-interface';
-import {OrderService} from '../../services/order.service';
+
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {UserInterface} from "../../interfaces/user-interface";
