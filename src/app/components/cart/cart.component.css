@@ -1,9 +1,8 @@
 .cartMatCard{
   width: 260px;
   height: 350px;
-  position: fixed;
-  top: 330px;
-  left: 20px;
+  display: flex;
+  flex-direction: column;
 }
 .cartMatCardActions{
   display: flex;
