@@ -10,6 +10,7 @@ import {LoginFormInterface} from '../../interfaces/login-form-interface';
   templateUrl: './auth-dialog.component.html',
   styleUrls: ['./auth-dialog.component.css']
 })
+<<<<<<< HEAD
 
 export class AuthDialogComponent {
 
@@ -56,6 +57,11 @@ export class AuthDialogComponent {
 /*
  //This syntactic madness here because of custom error messages
   //that (probably) cannot be shown with FormGroup sugar provider
+=======
+export class AuthDialogComponent implements OnInit {
+  regForm: RegistrationFormInterface = {name: null, username: null, password: null, shippingAddress: null, phoneNumber: null};
+  logForm: LoginFormInterface = {username: null, password: null};
+>>>>>>> parent of 499ba46... development sync
   usernameFormControl = new FormControl('', [Validators.required, Validators.maxLength(20)]);
   passwordFormControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
   phoneFormControl = new FormControl('', [Validators.required, Validators.pattern('^\\+375 \\((17|29|33|44|25)\\) [0-9]{3}-[0-9]{2}-[0-9]{2}$')]);
@@ -108,4 +114,19 @@ export class AuthDialogComponent {
       return 'Sorry, your address is too long';
     }
   }
+<<<<<<< HEAD
  */
+=======
+  registration() {
+    this.authService.registration(this.regForm);
+    this.dialogRef.close();
+  }
+  login() {
+    this.authService.login(this.logForm);
+    this.authService.getUserInfo();
+    this.dialogRef.close();
+  }
+  ngOnInit(): void {
+  }
+}
+>>>>>>> parent of 499ba46... development sync

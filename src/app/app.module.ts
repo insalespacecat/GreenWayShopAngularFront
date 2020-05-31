@@ -28,11 +28,14 @@ import {MatIconModule} from '@angular/material/icon';
 import { QuantityPostfixPipe } from './pipes/quantityPostfix.pipe';
 import { AuthDialogComponent } from './components/auth-dialog/auth-dialog.component';
 import {MatTabsModule} from '@angular/material/tabs';
+<<<<<<< HEAD
 import { LogoutConfirmationDialogComponent } from './components/logout-confirmation-dialog/logout-confirmation-dialog.component';
 import { MyAccountComponent } from './components/my-account/my-account.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {MAT_CHIPS_DEFAULT_OPTIONS, MatChipsModule} from '@angular/material/chips';
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
+=======
+>>>>>>> parent of 499ba46... development sync
 
 @NgModule({
   declarations: [
@@ -47,8 +50,6 @@ import {COMMA, ENTER} from "@angular/cdk/keycodes";
     OrderConfirmedComponent,
     QuantityPostfixPipe,
     AuthDialogComponent,
-    LogoutConfirmationDialogComponent,
-    MyAccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,9 +69,7 @@ import {COMMA, ENTER} from "@angular/cdk/keycodes";
     AppRoutes,
     MatIconModule,
     ReactiveFormsModule,
-    MatTabsModule,
-    MatDividerModule,
-    MatChipsModule
+    MatTabsModule
   ],
   providers:[],
   bootstrap: [AppComponent]

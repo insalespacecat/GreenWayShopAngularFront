@@ -15,10 +15,20 @@
       <mat-icon matSuffix>location_city</mat-icon>
     </mat-form-field>
       <h3>I will pay with:</h3>
+<<<<<<< HEAD
     <mat-radio-group [(ngModel)]="paymentMethod" [ngModelOptions]="{standalone: true}" class="radioPaymentMethodInput">
+=======
+    <mat-form-field>
+    <mat-radio-group [(ngModel)]="paymentMethod" [ngModelOptions]="{standalone: true}" class="radioPaymethodInput">
+>>>>>>> parent of 499ba46... development sync
         <mat-radio-button value="creditCard" >Credit card</mat-radio-button><br/>
         <mat-radio-button value="cash">Cash</mat-radio-button>
     </mat-radio-group>
+<<<<<<< HEAD
+=======
+    </mat-form-field>
+    <h3 class="total"> Total: {{info.total | currency : 'USD' : 'symbol' : '.2'}}</h3>
+>>>>>>> parent of 499ba46... development sync
   </div>
   <mat-dialog-actions>
     <button mat-raised-button color="primary" type="submit"

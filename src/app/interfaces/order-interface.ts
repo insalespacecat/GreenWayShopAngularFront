@@ -10,5 +10,4 @@ export interface OrderInterface {
   phoneNumber: string;
   paymentMethod: string;
   user: UserInterface;
-  discount: number;
 }
