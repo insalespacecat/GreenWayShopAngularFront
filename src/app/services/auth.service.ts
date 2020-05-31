@@ -48,7 +48,7 @@ export class AuthService {
           this.getLoginStatusFromSessionStorage();
         }
       });
-    sessionStorage.setItem('isAuthenticated', JSON.stringify(false));
+
   }
   logout() {
     this.http.post(this.APIURL + '/dropAuth', {withCredentials: true});
@@ -70,7 +70,6 @@ export class AuthService {
   }
   getLoginStatusFromSessionStorage() {
     this.isAuthenticated = JSON.parse(sessionStorage.getItem('isAuthenticated'));
-    console.log("is authenticated: " + JSON.stringify(this.isAuthenticated));
     return this.isAuthenticated;
   }
   /*

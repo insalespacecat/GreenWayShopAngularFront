@@ -32,8 +32,6 @@ import { LogoutConfirmationDialogComponent } from './components/logout-confirmat
 import { MyAccountComponent } from './components/my-account/my-account.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatChipsModule} from '@angular/material/chips';
-import {MatPaginatorModule} from "@angular/material/paginator";
-import { ItemsPerOrderDialogComponent } from './components/items-per-order-dialog/items-per-order-dialog.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +48,6 @@ import { ItemsPerOrderDialogComponent } from './components/items-per-order-dialo
     AuthDialogComponent,
     LogoutConfirmationDialogComponent,
     MyAccountComponent,
-    ItemsPerOrderDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,8 +69,7 @@ import { ItemsPerOrderDialogComponent } from './components/items-per-order-dialo
     ReactiveFormsModule,
     MatTabsModule,
     MatDividerModule,
-    MatChipsModule,
-    MatPaginatorModule
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

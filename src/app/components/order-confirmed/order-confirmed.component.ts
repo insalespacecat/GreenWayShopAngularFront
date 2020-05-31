@@ -9,9 +9,8 @@ import {OrderService} from '../../services/order.service';
 export class OrderConfirmedComponent implements OnInit {
   order: any;
   constructor(private orderService: OrderService) {
-    this.order = null;
+    this.orderService.getLastOrder().subscribe(res => this.order = res);
   }
   ngOnInit(): void {
-    this.orderService.getLastOrder().subscribe(res => this.order = res);
   }
 }

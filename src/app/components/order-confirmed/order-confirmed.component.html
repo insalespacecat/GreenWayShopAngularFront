@@ -1,13 +1,8 @@
 <mat-card class="orderConfirmedMatCard">
 <mat-card-title><h2>Your order has been placed!</h2></mat-card-title>>
-<mat-card-content>
-  <div *ngIf="order">
+<mat-card-content *ngIf="order">
   <h3>Your order number: #{{order.id}}</h3>
-  <h3>Thank you for the purchase, {{order.name}}!:)</h3>
-  </div>
-  <div *ngIf="!order">
-    <h3>Your order has not been placed, we're sorry:(</h3>
-  </div>
+  <h3>Thank you for purchase, {{order.name}}!:)</h3>
 </mat-card-content>
 <mat-card-actions>
   <button mat-raised-button [routerLink]="['/']">Continue to shopping</button>

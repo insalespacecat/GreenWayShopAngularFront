@@ -28,6 +28,7 @@ export class CartComponent implements DoCheck {
   openOrderDialog(): void {
     this.info.items = this.cartService.get();
     this.info.total  = this.cartService.getTotalPrice();
+    this.info.discount = this.discount;
     if (this.info.total > 0) {
       const dialogConfig = {
         width: '250px',
