@@ -14,4 +14,7 @@ export class OrderService {
   getLastOrder() {
     return this.http.get<OrderInterface>(this.OrderAPIURL + '/last', {withCredentials: true});
   }
+  getAllOrdersByUsername(username: string){
+    return this.http.get<Array<OrderInterface>>(this.OrderAPIURL + '/getAllOrdersByUsername/' + username, {withCredentials: true});
+  }
 }
