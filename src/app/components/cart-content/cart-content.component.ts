@@ -1,5 +1,6 @@
 import {Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {PurchaseProcessService} from "../../services/purchase-process.service";
+import {CartService} from "../../services/cart.service";
 
 @Component({
   selector: 'app-cart-content',
@@ -12,7 +13,7 @@ export class CartContentComponent implements OnInit {
   cartBody;
   discount;
 
-  constructor(private purchaseProcessService: PurchaseProcessService) {
+  constructor(private purchaseProcessService: PurchaseProcessService, private cartService: CartService) {
   }
 
   deleteItem(item) {
@@ -22,12 +23,16 @@ export class CartContentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.purchaseProcessService.getSync();
-    this.cartBody = this.purchaseProcessService.getCart();
+    this.cartService.getSync();
+    this.cartBody = this.cartService.get();
+    //this.cartBody = this.cartService.getItems();
+    //this.cartBody = this.purchaseProcessService.getCart();
   }
 
   refreshCartView() {
     console.log("CartView refresh is triggered!");
-    this.cartBody = this.purchaseProcessService.getCart();
+    this.cartService.getSync();
+    this.cartBody = this.cartService.get();
+    //this.cartBody = this.purchaseProcessService.getCart();
   }
 }

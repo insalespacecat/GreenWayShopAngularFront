@@ -23,7 +23,7 @@ import {CartContentComponent} from "../cart-content/cart-content.component";
 })
 export class ProductGridComponent implements OnInit {
   productInfoList: Array<ProductInterface>;
-  @ViewChild('CartContentComponent') cartContent: CartContentComponent;
+  @ViewChild(CartContentComponent) cartContent: CartContentComponent;
   constructor(private productService: ProductService) { }
 
   triggerSyncInCartContent(){

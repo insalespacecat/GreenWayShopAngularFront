@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ProductInterface} from '../../interfaces/product-interface';
 import {CartItemInterface} from '../../interfaces/cart-item-interface';
 import {PurchaseProcessService} from "../../services/purchase-process.service";
+import {CartService} from "../../services/cart.service";
 
 @Component({
   selector: 'app-product-card',
@@ -15,11 +16,12 @@ export class ProductCardComponent {
 
   cartItem: CartItemInterface = {id: null, quantity: 1, price: null, name: null};
 
-  constructor(private purchaseProcessService: PurchaseProcessService) { }
+  constructor(private purchaseProcessService: PurchaseProcessService, private cartService: CartService) { }
 
   addToCart() {
     this.assembleCartItem();
-    this.purchaseProcessService.addItemToCart(this.cartItem);
+    this.cartService.add(this.cartItem);
+    //this.purchaseProcessService.addItemToCart(this.cartItem);
     this.syncCartContent.emit();
   }
 

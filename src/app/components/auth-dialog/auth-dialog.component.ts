@@ -10,6 +10,7 @@ import {LoginFormInterface} from '../../interfaces/login-form-interface';
   templateUrl: './auth-dialog.component.html',
   styleUrls: ['./auth-dialog.component.css']
 })
+
 export class AuthDialogComponent {
 
   //Forms for ngModel
