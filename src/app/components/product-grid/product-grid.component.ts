@@ -1,7 +1,8 @@
-import {Component, DoCheck, OnInit} from '@angular/core';
+import {Component, DoCheck, OnInit, ViewChild} from '@angular/core';
 import {ProductService} from '../../services/product.service';
 import {ProductInterface} from '../../interfaces/product-interface';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {CartContentComponent} from "../cart-content/cart-content.component";
 
 @Component({
   selector: 'app-product-grid',
@@ -22,10 +23,13 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 export class ProductGridComponent implements OnInit {
   productInfoList: Array<ProductInterface>;
+  @ViewChild('CartContentComponent') cartContent: CartContentComponent;
   constructor(private productService: ProductService) { }
 
+  triggerSyncInCartContent(){
+    this.cartContent.refreshCartView();
+  }
   ngOnInit(): void {
     this.productService.getProducts().subscribe(res => this.productInfoList = res);
-
   }
 }

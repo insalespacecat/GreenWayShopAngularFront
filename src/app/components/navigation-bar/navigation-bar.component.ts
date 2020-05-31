@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, DoCheck, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {CartService} from '../../services/cart.service';
 import {OrderService} from '../../services/order.service';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';

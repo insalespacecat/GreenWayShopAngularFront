@@ -2,14 +2,14 @@
   <mat-card-header class="cardHeader">
     {{productInfo.name}}
   </mat-card-header>
-  <form novalidate (ngSubmit)="addToCart()">
+  <form novalidate>
   <mat-card-content>
     <img class="productImg" src="/assets/images/{{productInfo.id}}.jpg"><br/>
     {{productInfo.price | currency: 'USD': 'symbol':'.2'}}<br/>
     <mat-form-field>
     <input matInput type="number" placeholder="Quantity" [(ngModel)]="this.cartItem.quantity" name="quantity">
     </mat-form-field><br/>
-    <button mat-raised-button color="primary" type="submit" [disabled]="this.cartItem.quantity < 1">Add to cart</button><br/>
+    <button mat-raised-button color="primary" (click)="addToCart()" [disabled]="this.cartItem.quantity < 1">Add to cart</button><br/>
   </mat-card-content>
   </form>
 </mat-card>

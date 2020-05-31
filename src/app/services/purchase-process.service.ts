@@ -6,6 +6,7 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 
+//TODO: This implementation is rly bad. Rewrite it!
 
 //Purchase process service unites cart service and order service
 export class PurchaseProcessService {
@@ -28,9 +29,7 @@ export class PurchaseProcessService {
 
   //Methods for cartContent
   getCart(){
-    //if place some function here DoCheck lifecycle hooks breaks and starts to check for changes
-    //every 0.1 sec, that allows us to update cart as we wanted, however this is kolhoz...
-    this.findCartItemByIdInCartHolder(0, null);
+    this.getSync();
     return JSON.parse(sessionStorage.getItem('cartBody'));
   }
 
@@ -72,7 +71,7 @@ export class PurchaseProcessService {
 
   //**Cart Filler
   //Cart filler provides functionality to add new items to the cart.
-  //Every product "!carD" has "Add to cart" button with "quantity" input.
+  //Every product carD has "Add to cart" button with quantity input.
   //Purchase process service should be injected in the carDs in order
   //to make the interaction work.
   //Cart filler logic uses local cartFillerCartHolder array, that
@@ -83,15 +82,27 @@ export class PurchaseProcessService {
   //and then we perform a postSync()
 
   addItemToCart(item: CartItemInterface){
-      let cartHolder = JSON.parse(sessionStorage.getItem('cartBody'));
-      let index = this.findCartItemByIdInCartHolder(item.id, cartHolder);
+      this.getSync();
+      let index: number = null;
+      let cartHolder: Array<CartItemInterface> = JSON.parse(sessionStorage.getItem('cartBody'));
+      if(cartHolder == null){
+        cartHolder = new Array<CartItemInterface>();
+      }
+      else {
+        index = this.findCartItemByIdInCartHolder(item.id, cartHolder);
+        console.log("index is " + index);
+      }
+      console.log("Checking addItemToCart...");
+      console.log("cartHolder is" + JSON.stringify(cartHolder));
       if (index !== null) {
         cartHolder[index].price += item.price;
         cartHolder[index].quantity += item.quantity;
-        sessionStorage.setItem('cartBody', cartHolder);
+        console.log("cartHolder is" + JSON.stringify(cartHolder));
+        sessionStorage.setItem('cartBody', JSON.stringify(cartHolder));
       } else {
         cartHolder.push(item);
-        sessionStorage.setItem('cartBody', cartHolder);
+        console.log("Pushed the item, cartHolder is now: " + JSON.stringify(cartHolder));
+        sessionStorage.setItem('cartBody', JSON.stringify(cartHolder));
       }
       this.postSync(cartHolder);
   }

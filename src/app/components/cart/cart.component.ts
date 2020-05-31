@@ -20,7 +20,7 @@ import {PurchaseProcessService} from "../../services/purchase-process.service";
 //So CartComponent's logic is concentrated on ORDER button. Order button here should open OrderDialog.
 //openOrderDialog() assembles order object and ships it in order dialog, after order dialog closing,
 //if dialog returns true, cart is deleted and user is navigated on /thankYou page
-export class CartComponent implements DoCheck, OnInit {
+export class CartComponent implements OnInit {
 
   //This component requires userInfo, so it consumes it from sessionStorage using authService onInit and
   //uses the local variable. If there is no user storage, then variable is to be initialized with nulls
@@ -79,7 +79,7 @@ export class CartComponent implements DoCheck, OnInit {
   getDiscountInMoney() {
     return (this.total  / 100 * this.discount);
   }
-  ngDoCheck(): void {
+  refreshPriceView() {
     this.total = this.purchaseProcessService.getTotalPrice();
     if (this.authService.getLoginStatusFromSessionStorage()) {
       this.discount = this.authService.getUserInfoFromSessionStorage().discount;
