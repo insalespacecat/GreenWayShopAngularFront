@@ -1,8 +1,8 @@
-import {Component, DoCheck, OnInit} from '@angular/core';
+import {Component, DoCheck, OnInit, ViewChild} from '@angular/core';
 import {ProductService} from '../../services/product.service';
 import {ProductInterface} from '../../interfaces/product-interface';
-import {CartService} from '../../services/cart.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {CartContentComponent} from "../cart-content/cart-content.component";
 
 @Component({
   selector: 'app-product-grid',
@@ -21,25 +21,15 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
       ])
   ]
 })
-export class ProductGridComponent implements OnInit, DoCheck {
+export class ProductGridComponent implements OnInit {
   productInfoList: Array<ProductInterface>;
-  cartHidden = true;
-  constructor(private productService: ProductService, private cartService: CartService) { }
-  hideShowCart() {
-    this.cartHidden = !this.cartHidden;
-  }
-  ngDoCheck(): void {
-    if (this.cartService.firstProductAdded()) {
-      console.log('First product added');
-      this.cartHidden = false;
-    }
+  @ViewChild(CartContentComponent) cartContent: CartContentComponent;
+  constructor(private productService: ProductService) { }
+
+  triggerSyncInCartContent(){
+    this.cartContent.refreshCartView();
   }
   ngOnInit(): void {
     this.productService.getProducts().subscribe(res => this.productInfoList = res);
-    if (this.cartService.hasProducts()) {
-      console.log('Cart has products');
-      this.cartHidden = false;
-    }
-    JSON.stringify(this.productInfoList);
   }
 }
