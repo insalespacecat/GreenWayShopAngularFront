@@ -16,9 +16,9 @@ export class AuthService {
   APIURL = 'https://localhost:8443';
   constructor(private http: HttpClient) {
     if (this.getLoginStatusFromSessionStorage()) {
-   this.user = JSON.parse(sessionStorage.getItem('UserInfo'));
+      this.user = JSON.parse(sessionStorage.getItem('UserInfo'));
     }
-   // this.isAuthenticated = JSON.parse(sessionStorage.getItem('isAuthenticated'));
+    // this.isAuthenticated = JSON.parse(sessionStorage.getItem('isAuthenticated'));
   }
   registration(registrationForm: RegistrationFormInterface) {
     this.http.post(this.APIURL + '/registration', registrationForm, {withCredentials: true}).subscribe(res => this.registrationResult = res);
@@ -56,13 +56,13 @@ export class AuthService {
     sessionStorage.setItem('isAuthenticated', JSON.stringify(false));
   }
   loadUserInfoFromAPI() {
-      this.http.get<UserInterface>(this.APIURL + '/userInfoForSession', {withCredentials: true})
-        .subscribe(userData => {
-          this.user = userData;
-          console.log('Logged in user: ' + JSON.stringify(this.user));
-          sessionStorage.setItem('UserInfo', JSON.stringify(this.user));
-        });
-      return this.user;
+    this.http.get<UserInterface>(this.APIURL + '/userInfoForSession', {withCredentials: true})
+      .subscribe(userData => {
+        this.user = userData;
+        console.log('Logged in user: ' + JSON.stringify(this.user));
+        sessionStorage.setItem('UserInfo', JSON.stringify(this.user));
+      });
+    return this.user;
   }
   getUserInfoFromSessionStorage() {
     this.user = JSON.parse(sessionStorage.getItem('UserInfo'));
@@ -84,11 +84,11 @@ export class AuthService {
       }
   );
    */
-    /*
-    this.http.get<UserInterface>(this.APIURL + '/userInfoForSession', {withCredentials: true})
-      .subscribe(userData => {
-        this.user = userData;
-        console.log('Logged in user: ' + JSON.stringify(this.user));
-      });
-     */
+  /*
+  this.http.get<UserInterface>(this.APIURL + '/userInfoForSession', {withCredentials: true})
+    .subscribe(userData => {
+      this.user = userData;
+      console.log('Logged in user: ' + JSON.stringify(this.user));
+    });
+   */
 }

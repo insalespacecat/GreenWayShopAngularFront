@@ -1,6 +1,7 @@
 import {RouterModule, Routes} from '@angular/router';
 import {ProductGridComponent} from './components/product-grid/product-grid.component';
 import {OrderConfirmedComponent} from './components/order-confirmed/order-confirmed.component';
+import {MyAccountComponent} from './components/my-account/my-account.component';
 
 const routes: Routes = [
   {
@@ -8,6 +9,9 @@ const routes: Routes = [
   },
   {
     path: 'thankYou', component: OrderConfirmedComponent
+  },
+  {
+    path: 'me', component: MyAccountComponent
   },
 ];
 

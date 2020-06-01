@@ -1,14 +1,14 @@
 <mat-card class="matCardHeader">
   <mat-card-content>
-        <img src="/assets/images/header.jpg" class="headerImage">
+    <img src="/assets/images/header.jpg" class="headerImage">
   </mat-card-content>
 </mat-card>
 <mat-toolbar class="toolbar" color="accent">
   <nav>
     <button mat-raised-button class="navButton" color="primary" [routerLink]="['/']">Shop</button>
-    <button mat-raised-button class="navButton" color="primary">My Account</button>
+    <button mat-raised-button class="navButton" color="primary" [routerLink]="['/me']">My Account</button>
     <button mat-raised-button class="navButton" color="primary">About us</button>
   </nav>
-    <button mat-raised-button color="primary" (click)="openAuthDialog()"><mat-icon matSuffix>vpn_key</mat-icon></button>
+  <button *ngIf="!authenticationStatus()" mat-raised-button color="primary" (click)="openAuthDialog()"><mat-icon matSuffix>vpn_key</mat-icon></button>
+  <button *ngIf="authenticationStatus()" mat-raised-button color="primary" (click)="openLogoutConfirmationDialog()"><mat-icon matSuffix>exit_to_app</mat-icon></button>
 </mat-toolbar>
-

@@ -1,38 +1,30 @@
-import {Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {PurchaseProcessService} from "../../services/purchase-process.service";
-import {CartService} from "../../services/cart.service";
+import {Component, DoCheck, OnInit} from '@angular/core';
+import {ProductInterface} from '../../interfaces/product-interface';
+import {CartService} from '../../services/cart.service';
+import {CartItemInterface} from '../../interfaces/cart-item-interface';
 
 @Component({
   selector: 'app-cart-content',
   templateUrl: './cart-content.component.html',
   styleUrls: ['./cart-content.component.css']
 })
-export class CartContentComponent implements OnInit {
-
+export class CartContentComponent implements OnInit, DoCheck {
   displayedColumns: string[] = ['itemName', 'itemQuantity', 'itemPrice', 'deleteButtons'];
-  cartBody;
+  cartBody: Array<CartItemInterface>;
   discount;
-
-  constructor(private purchaseProcessService: PurchaseProcessService, private cartService: CartService) {
+  constructor(private cartService: CartService) { }
+  deleteItem(index: number) {
+    this.cartService.remove(index);
+    this.cartBody = this.cartService.get();
   }
-
-  deleteItem(item) {
-    console.log('delete item is executed');
-    this.purchaseProcessService.deleteItemFromCart(item);
-    this.cartBody = this.purchaseProcessService.getCart();
-  }
-
   ngOnInit(): void {
     this.cartService.getSync();
     this.cartBody = this.cartService.get();
-    //this.cartBody = this.cartService.getItems();
-    //this.cartBody = this.purchaseProcessService.getCart();
   }
 
-  refreshCartView() {
-    console.log("CartView refresh is triggered!");
-    this.cartService.getSync();
+  ngDoCheck(): void {
     this.cartBody = this.cartService.get();
-    //this.cartBody = this.purchaseProcessService.getCart();
+    console.log(JSON.stringify(this.cartBody));
   }
+
 }

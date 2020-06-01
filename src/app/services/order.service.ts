@@ -9,7 +9,7 @@ export class OrderService {
   OrderAPIURL = 'https://localhost:8443/order';
   constructor(private http: HttpClient) { }
   placeOrder(order: OrderInterface) {
-   return this.http.post(this.OrderAPIURL, order);
+    return this.http.post(this.OrderAPIURL, order);
   }
   getLastOrder() {
     return this.http.get<OrderInterface>(this.OrderAPIURL + '/last', {withCredentials: true});

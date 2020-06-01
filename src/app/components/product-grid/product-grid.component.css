@@ -1,16 +1,11 @@
 .productGrid{
   display: flex;
   justify-content: center;
-  flex-direction: column;
-  margin: 20px;
 }
-
 .showCartButton{
-  width: 260px;
-  display: flex;
-  flex-direction: column;
+  width: 295px;
+  height: 40px;
+  position: fixed;
+  top: 720px;
+  left: 20px;
 }
-.cartTile{
-  width: auto;
-}
-
