@@ -7,3 +7,6 @@
   margin-bottom: 12px;
   margin-top: 12px;
 }
+mat-chip {
+  background-color: #4caf50 !important;
+}

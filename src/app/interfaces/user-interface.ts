@@ -3,7 +3,4 @@ export interface UserInterface {
   name: string;
   authorities: string;
   active: boolean;
-  shippingAddress: string;
-  phoneNumber: string;
-  discount: number;
 }

@@ -1,61 +1,60 @@
 <mat-tab-group dynamicHeight>
   <mat-tab label="Sign up">
-<form novalidate (keydown.enter)="$event.target.tagName == 'TEXTAREA'" (ngSubmit)="registration()" class="signUpForm">
+<form novalidate (keydown.enter)="$event.target.tagName == 'TEXTAREA'" [formGroup]="formGroupRegistration" (ngSubmit)="initRegistrationProcess()" class="signUpForm">
   <div mat-dialog-content class="dialogContent">
     <mat-form-field>
-      <input matInput placeholder="Username" name="registrationUsername" type="text" [(ngModel)]="regForm.username" [formControl]="usernameFormControl">
+      <input matInput placeholder="Username" name="registrationUsername" type="text" [(ngModel)]="registrationForm.username"
+              formControlName="usernameFormControl">
       <mat-icon matSuffix>alternate_email</mat-icon>
-      <mat-error *ngIf="usernameFormControl.invalid">{{passwordGetErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Password" name="registrationPassword" type="password" [(ngModel)]="regForm.password" [formControl]="passwordFormControl">
+      <input matInput placeholder="Password" name="registrationPassword" type="password" [(ngModel)]="registrationForm.password"
+             formControlName="passwordFormControl">
       <mat-icon matSuffix>vpn_key</mat-icon>
-      <mat-error *ngIf="passwordFormControl.invalid">{{usernameGetErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Name" name="registrationName" type="text" [(ngModel)]="regForm.name" [formControl]="nameFormControl">
+      <input matInput placeholder="Name" name="registrationName" type="text" [(ngModel)]="registrationForm.name"
+             formControlName="nameFormControl">
       <mat-icon matSuffix>person</mat-icon>
-      <mat-error *ngIf="nameFormControl.invalid">{{nameGetErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Phone number" name="registrationPhone" type="text" [(ngModel)]="regForm.phoneNumber"
-             [formControl]="phoneFormControl" >
+      <input matInput placeholder="Phone number" name="registrationPhone" type="text" [(ngModel)]="registrationForm.phoneNumber"
+             formControlName="phoneFormControl">
       <mat-icon matSuffix>local_phone</mat-icon>
       <mat-hint>For example: +375 (29) 123-12-31</mat-hint>
-      <mat-error *ngIf="phoneFormControl.invalid">{{phoneGetErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Shipping address" name="registrationShippingAddress" type="text" [(ngModel)]="regForm.shippingAddress"
-             [formControl]="addressFormControl">
+      <input matInput placeholder="Shipping address" name="registrationShippingAddress" type="text" [(ngModel)]="registrationForm.shippingAddress"
+             formControlName="addressFormControl">
       <mat-icon matSuffix>location_city</mat-icon>
-      <mat-error>{{addressGetErrorMessage()}}</mat-error>
     </mat-form-field>
+    <mat-chip-list>
+    <mat-chip color="warn" [disabled]="true" *ngIf="!registrationSuccess">Server error</mat-chip>
+    </mat-chip-list>
   </div>
   <mat-dialog-actions>
     <button mat-raised-button color="primary" type="submit"
-            [disabled]="phoneFormControl.invalid || nameFormControl.invalid
-            || addressFormControl.invalid || usernameFormControl.invalid
-            || passwordFormControl.invalid">Sign up</button>
+            [disabled]="formGroupRegistration.invalid">Sign up</button>
   </mat-dialog-actions>
 </form>
   </mat-tab>
   <mat-tab label="Login">
-    <form novalidate (keydown.enter)="$event.target.tagName == 'TEXTAREA'" (ngSubmit)="login()" class="signUpForm">
+    <form novalidate (keydown.enter)="$event.target.tagName == 'TEXTAREA'" [formGroup]="formGroupLogin" (ngSubmit)="initLoginProcess()" class="signUpForm">
       <div mat-dialog-content class="dialogContent">
         <mat-form-field>
-          <input matInput placeholder="Username" name="registrationUsername" type="text" [(ngModel)]="logForm.username" [formControl]="usernameFormControl">
+          <input matInput placeholder="Username" name="registrationUsername" type="text" [(ngModel)]="loginForm.username"
+                 formControlName="usernameFormControl">
           <mat-icon matSuffix>alternate_email</mat-icon>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Password" name="registrationPassword" type="password" [(ngModel)]="logForm.password" [formControl]="passwordFormControl">
+          <input matInput placeholder="Password" name="registrationPassword" type="password" [(ngModel)]="loginForm.password"
+                 formControlName="passwordFormControl">
           <mat-icon matSuffix>vpn_key</mat-icon>
         </mat-form-field>
-        <mat-chip color="warn" *ngIf="loginError()">Please, check your credentials and try again.</mat-chip>
       </div>
       <mat-dialog-actions>
         <button mat-raised-button color="primary" type="submit"
-                [disabled]="usernameFormControl.invalid
-            || passwordFormControl.invalid">Login</button>
+                [disabled]="formGroupLogin.invalid">Login</button>
       </mat-dialog-actions>
     </form>
   </mat-tab>
