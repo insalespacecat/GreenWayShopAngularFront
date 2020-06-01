@@ -75,6 +75,17 @@ export class AuthService {
     console.log("is authenticated: " + JSON.stringify(this.isAuthenticated));
     return this.isAuthenticated;
   }
+  enableAdminMode() {
+    sessionStorage.setItem("admin", JSON.stringify(true));
+    console.log("ADMIN MODE ACTIVATED");
+  }
+  disableAdminMode() {
+    sessionStorage.setItem("admin", JSON.stringify(false));
+  }
+  isInAdminMode() {
+    return JSON.parse(sessionStorage.getItem("admin"));
+  }
+
   /*
     /*
   login(loginForm: LoginFormInterface) {

@@ -1,0 +1,12 @@
+.adminMenuButtons{
+  display: flex;
+  min-height: 30%;
+  min-width: 30%;
+  font-size: large;
+  justify-content: center;
+  align-content: center;
+}
+mat-grid-tile-header{
+  display: flex;
+  justify-content: center;
+}

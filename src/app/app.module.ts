@@ -35,6 +35,11 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { ItemsPerOrderDialogComponent } from './components/items-per-order-dialog/items-per-order-dialog.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { AdminViewComponent } from './components/admin-view/admin-view.component';
+import { ManageProductsComponent } from './components/manage-products/manage-products.component';
+import { ProductCardAdminEditComponent } from './components/product-card-admin-edit/product-card-admin-edit.component';
+import { DeleteProductConfirmationDialogComponent } from './components/delete-product-confirmation-dialog/delete-product-confirmation-dialog.component';
+import { AddNewProductDialogComponent } from './components/add-new-product-dialog/add-new-product-dialog.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +58,11 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
     MyAccountComponent,
     ItemsPerOrderDialogComponent,
     AboutUsComponent,
+    AdminViewComponent,
+    ManageProductsComponent,
+    ProductCardAdminEditComponent,
+    DeleteProductConfirmationDialogComponent,
+    AddNewProductDialogComponent,
   ],
   imports: [
     BrowserModule,

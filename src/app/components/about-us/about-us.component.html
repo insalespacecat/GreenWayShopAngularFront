@@ -6,8 +6,11 @@
 
         <h3>The GreenWay Shop project</h3>
         <h3>Author: Andrei Mazalo, student of Minsk Radioengineering College</h3>
-        <button mat-raised-button>Click here to access admin functionality</button>
-        <h3>Project's features:</h3>
+        <button mat-raised-button (click)="goToAdmin()" [routerLink]="['/admin/manageProducts']">Click here to access admin functionality</button>
+
+        <br/>
+        <br/>
+        <h1>Project's features:</h1>
         <h4><b> For shop owners: </b></h4>
         <h4>-CRUD operations on products; </h4>
         <h4> -New orders tracking functionality for workers to provide </h4>

@@ -14,6 +14,7 @@ import {AuthService} from '../../services/auth.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements DoCheck {
+
   total = 0;
   info: OrderInterface = {id: null, name: null, items: null, paymentMethod: null, address: null, phoneNumber: null,
     total: null, user: this.authService.user};

@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ProductInterface} from '../../interfaces/product-interface';
 import {CartItemInterface} from '../../interfaces/cart-item-interface';
 import {CartService} from "../../services/cart.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-product-card',

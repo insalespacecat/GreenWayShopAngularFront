@@ -1,6 +1,9 @@
 <html>
-<header>
+<header *ngIf="!isInAdminMode()">
   <app-navigation-bar></app-navigation-bar>
+</header>
+<header *ngIf="isInAdminMode()">
+  <app-admin-view></app-admin-view>
 </header>
 <body>
   <router-outlet></router-outlet>

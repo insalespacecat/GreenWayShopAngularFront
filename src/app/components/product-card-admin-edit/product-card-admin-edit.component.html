@@ -1,0 +1,13 @@
+<mat-card>
+  <mat-card-header>
+   {{productInfo.name}}
+  </mat-card-header>
+  <mat-card-content>
+    <img class="productImg" src="/assets/images/{{productInfo.id}}.jpg"><br/>
+    {{productInfo.price | currency: 'USD': 'symbol':'.2'}}<br/>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="openEditProductDialog()">Edit</button>
+    <button mat-raised-button color="warn" (click)="openProductDeleteConfirmationDialog()">Delete</button>
+  </mat-card-actions>
+</mat-card>
