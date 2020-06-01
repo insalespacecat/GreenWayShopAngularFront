@@ -18,7 +18,7 @@ export class AuthService {
     if (this.getLoginStatusFromSessionStorage()) {
       this.user = JSON.parse(sessionStorage.getItem('UserInfo'));
     }
-    // this.isAuthenticated = JSON.parse(sessionStorage.getItem('isAuthenticated'));
+    this.isAuthenticated = JSON.parse(sessionStorage.getItem('isAuthenticated'));
   }
   registration(registrationForm: RegistrationFormInterface) {
     this.http.post(this.APIURL + '/registration', registrationForm, {withCredentials: true}).subscribe(res => this.registrationResult = res);
@@ -40,6 +40,7 @@ export class AuthService {
         this.loginResult = res;
         console.log('login result: ' + JSON.stringify(this.loginResult));
         console.log('loginResult.code: ' + JSON.stringify(this.loginResult.code));
+        /*
         if (this.loginResult.code === 200) {
           sessionStorage.setItem('isAuthenticated', JSON.stringify(true));
           this.getLoginStatusFromSessionStorage();
@@ -47,8 +48,9 @@ export class AuthService {
           sessionStorage.setItem('isAuthenticated', JSON.stringify(false));
           this.getLoginStatusFromSessionStorage();
         }
+         */
       });
-    sessionStorage.setItem('isAuthenticated', JSON.stringify(false));
+    sessionStorage.setItem('isAuthenticated', JSON.stringify(true));
   }
   logout() {
     this.http.post(this.APIURL + '/dropAuth', {withCredentials: true});

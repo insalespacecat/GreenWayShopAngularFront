@@ -34,6 +34,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { ItemsPerOrderDialogComponent } from './components/items-per-order-dialog/items-per-order-dialog.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { ItemsPerOrderDialogComponent } from './components/items-per-order-dialo
     LogoutConfirmationDialogComponent,
     MyAccountComponent,
     ItemsPerOrderDialogComponent,
+    AboutUsComponent,
   ],
   imports: [
     BrowserModule,

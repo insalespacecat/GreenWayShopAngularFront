@@ -1,4 +1,7 @@
-<mat-grid-list class="productGrid" cols="4">
+<mat-card *ngIf="!userInfo">
+<h3>Please refresh the page after login to see your account info!</h3>
+</mat-card>
+<mat-grid-list class="productGrid" cols="4" *ngIf="userInfo">
   <mat-grid-tile-header>
     <mat-card class="welcomeHeader"><h1>Welcome, {{userInfo.name}}!</h1></mat-card>
   </mat-grid-tile-header>
@@ -28,7 +31,7 @@
         <h3> Looks like you don't have any orders yet!</h3>
       </mat-card-content>
     </mat-card>
-    <mat-card *ngIf="orders">
+    <mat-card *ngIf="orders" class="ordersTableCard">
       <mat-card-header>
         <h2>Your orders</h2>
       </mat-card-header>
@@ -49,7 +52,6 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>

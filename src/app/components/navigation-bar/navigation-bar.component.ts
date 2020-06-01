@@ -15,8 +15,10 @@ import {LogoutConfirmationDialogComponent} from '../logout-confirmation-dialog/l
   styleUrls: ['./navigation-bar.component.css'],
 })
 export class NavigationBarComponent {
+
   constructor(private dialog: MatDialog, private authService: AuthService) {
   }
+
   authenticationStatus() {
     return this.authService.getLoginStatusFromSessionStorage();
   }

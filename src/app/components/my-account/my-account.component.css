@@ -9,6 +9,12 @@
   justify-content: center;
   align-content: center;
 }
+.ordersTableCard{
+  width: 80%;
+  max-height: 300px;
+  overflow-y: auto;
+}
 table {
   width: 100%;
+
 }
