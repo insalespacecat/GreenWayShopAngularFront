@@ -15,12 +15,12 @@
       <textarea matInput placeholder="This product is..."
                 [(ngModel)]="product.price"></textarea>
       </mat-form-field>
-    <button mat-button matStepperNext (click)="submitToServer(true)">Next</button>
+    <button mat-button matStepperNext (click)="submitToServer()">Next</button>
   </form>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Upload product image</ng-template>
-    <input type="file" value="Select image" (change)="selectFile($event)" *ngIf="!isAdded">
+    <input type="file" accept="image/jpeg" value="Select image" (change)="selectFile($event)" *ngIf="!isAdded">
     <mat-icon color="primary" *ngIf="isAdded">done_outline</mat-icon>
   </mat-step>
 </mat-vertical-stepper>

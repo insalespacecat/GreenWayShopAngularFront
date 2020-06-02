@@ -19,4 +19,8 @@ export class FileService {
   get(filename: string){
     return this.http.get(this.imageUploadApi + '/' + filename);
   }
+
+  delete(filename: string){
+    return this.http.delete(this.imageUploadApi + '/' + filename);
+  }
 }

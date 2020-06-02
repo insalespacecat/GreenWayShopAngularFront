@@ -22,6 +22,8 @@ export class AddNewProductDialogComponent implements OnInit {
 
   file: File;
   isAdded = false;
+  editMode = false;
+  productNameBeforeEdit = null;
 
   constructor(public dialogRef: MatDialogRef<AddNewProductDialogComponent>, private productService: ProductService,
               private uploadService: FileService, @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -34,6 +36,9 @@ export class AddNewProductDialogComponent implements OnInit {
   }
 
   upload() {
+    if(this.editMode){
+      this.uploadService.delete(this.productNameBeforeEdit).subscribe(res => {});
+    }
     this.uploadService.upload(this.file, this.product.name).subscribe(
       res => {
         this.isAdded = true;
@@ -42,8 +47,10 @@ export class AddNewProductDialogComponent implements OnInit {
     this.file = undefined;
   }
 
-  submitToServer(postToServer: boolean){
-    if(postToServer){
+  submitToServer(){
+    if(this.editMode){
+      this.productService.patchProduct(this.product.id, this.product).subscribe(res => {});
+    } else {
       this.productService.addProduct(this.product).subscribe(res => {});
     }
   }
@@ -51,6 +58,8 @@ export class AddNewProductDialogComponent implements OnInit {
   ngOnInit(): void {
     if(this.data.info){
       this.product = Object.assign({}, this.data.info);
+      this.editMode = true;
+      this.productNameBeforeEdit = this.product.name;
     }
   }
 
