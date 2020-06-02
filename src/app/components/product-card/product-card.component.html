@@ -4,7 +4,7 @@
   </mat-card-header>
   <form novalidate>
   <mat-card-content>
-    <img class="productImg" src="/assets/images/{{productInfo.id}}.jpg"><br/>
+    <img class="productImg" src="https://localhost:8443/images/{{productInfo.name}}.jpg"><br/>
     {{productInfo.price | currency: 'USD': 'symbol':'.2'}}<br/>
     <mat-form-field>
     <input matInput type="number" placeholder="Quantity" [(ngModel)]="this.cartItem.quantity" name="quantity">

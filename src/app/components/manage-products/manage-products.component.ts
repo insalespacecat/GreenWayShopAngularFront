@@ -19,7 +19,7 @@ export class ManageProductsComponent implements OnInit {
 
   openNewProductDialog(){
     const dialogConfig = {
-      width: '250px'
+      width: '350px'
     };
     const orderDialogRef = this.dialog.open(AddNewProductDialogComponent, dialogConfig);
   }

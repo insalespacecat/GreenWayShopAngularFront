@@ -40,6 +40,8 @@ import { ManageProductsComponent } from './components/manage-products/manage-pro
 import { ProductCardAdminEditComponent } from './components/product-card-admin-edit/product-card-admin-edit.component';
 import { DeleteProductConfirmationDialogComponent } from './components/delete-product-confirmation-dialog/delete-product-confirmation-dialog.component';
 import { AddNewProductDialogComponent } from './components/add-new-product-dialog/add-new-product-dialog.component';
+import {MatStepperModule} from "@angular/material/stepper";
+import { EditProductDialogComponent } from './components/edit-product-dialog/edit-product-dialog.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,7 @@ import { AddNewProductDialogComponent } from './components/add-new-product-dialo
     ProductCardAdminEditComponent,
     DeleteProductConfirmationDialogComponent,
     AddNewProductDialogComponent,
+    EditProductDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,7 +88,8 @@ import { AddNewProductDialogComponent } from './components/add-new-product-dialo
     MatTabsModule,
     MatDividerModule,
     MatChipsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatStepperModule
   ],
   providers: [],
   bootstrap: [AppComponent]

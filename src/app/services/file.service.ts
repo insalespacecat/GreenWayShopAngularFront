@@ -10,9 +10,9 @@ export class FileService {
 
   constructor(private http: HttpClient) { }
 
-  upload(file: File){
+  upload(file: File, filename: string){
     let formData = new FormData();
-    formData.append("file", file, "test" + ".jpg");
+    formData.append("file", file, filename + ".jpg");
     return this.http.post(this.imageUploadApi + '/upload', formData);
   }
 

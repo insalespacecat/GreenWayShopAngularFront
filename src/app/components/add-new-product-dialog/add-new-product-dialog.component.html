@@ -1,27 +1,26 @@
-
-  <mat-card-header>
-    <h2>Add new product</h2>
-  </mat-card-header>
+<mat-vertical-stepper [linear]="true" #stepper>
+  <mat-step [stepControl]="formGroup">
   <form novalidate [formGroup]="formGroup">
-    <mat-card-content>
+    <ng-template matStepLabel>Fill product info</ng-template>
       <mat-form-field>
       <input matInput placeholder="Product name" name="productNameInput" type="text"
-             [(ngModel)]="newProduct.name" formControlName="nameFormControl">
+             [(ngModel)]="product.name" formControlName="nameFormControl">
       </mat-form-field>
       <mat-form-field>
       <input matInput placeholder="Price" name="productPriceInput" type="text"
-             [(ngModel)]="newProduct.price" formControlName="priceFormControl">
+             [(ngModel)]="product.price" formControlName="priceFormControl">
       </mat-form-field>
       <mat-form-field>
       <mat-label>Add a description</mat-label>
       <textarea matInput placeholder="This product is..."
-                [(ngModel)]="newProduct.price"></textarea>
+                [(ngModel)]="product.price"></textarea>
       </mat-form-field>
-      <input type="file" value="Select image" (change)="selectFile($event)" *ngIf="!isAdded">
-      <mat-icon color="primary" *ngIf="isAdded">done_outline</mat-icon>
-    </mat-card-content>
+    <button mat-button matStepperNext (click)="submitToServer(true)">Next</button>
   </form>
-  <mat-card-actions>
-    <button type="submit" mat-raised-button color="primary" (click)="close(true)"
-    [disabled]="formGroup.invalid">Add</button>
-  </mat-card-actions>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Upload product image</ng-template>
+    <input type="file" value="Select image" (change)="selectFile($event)" *ngIf="!isAdded">
+    <mat-icon color="primary" *ngIf="isAdded">done_outline</mat-icon>
+  </mat-step>
+</mat-vertical-stepper>
