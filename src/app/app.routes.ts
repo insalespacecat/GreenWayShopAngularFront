@@ -3,8 +3,8 @@ import {ProductGridComponent} from './components/product-grid/product-grid.compo
 import {OrderConfirmedComponent} from './components/order-confirmed/order-confirmed.component';
 import {MyAccountComponent} from './components/my-account/my-account.component';
 import {AboutUsComponent} from "./components/about-us/about-us.component";
-import {AdminViewComponent} from "./components/admin-view/admin-view.component";
 import {ManageProductsComponent} from "./components/manage-products/manage-products.component";
+import {OperatorViewComponent} from "./components/operator-view/operator-view.component";
 
 const routes: Routes = [
   {
@@ -21,6 +21,9 @@ const routes: Routes = [
   },
   {
     path: 'admin/manageProducts', component: ManageProductsComponent
+  },
+  {
+    path: 'admin/operatorView', component: OperatorViewComponent
   }
 ];
 

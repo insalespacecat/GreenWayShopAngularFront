@@ -17,4 +17,7 @@ export class OrderService {
   getAllOrdersByUsername(username: string){
     return this.http.get<Array<OrderInterface>>(this.OrderAPIURL + '/getAllOrdersByUsername/' + username, {withCredentials: true});
   }
+  getOperatorSlice(){
+    return this.http.get(this.OrderAPIURL + '/getOperatorSlice');
+  }
 }

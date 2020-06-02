@@ -42,6 +42,8 @@ import { DeleteProductConfirmationDialogComponent } from './components/delete-pr
 import { AddNewProductDialogComponent } from './components/add-new-product-dialog/add-new-product-dialog.component';
 import {MatStepperModule} from "@angular/material/stepper";
 import { EditProductDialogComponent } from './components/edit-product-dialog/edit-product-dialog.component';
+import { OperatorViewComponent } from './components/operator-view/operator-view.component';
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -66,6 +68,7 @@ import { EditProductDialogComponent } from './components/edit-product-dialog/edi
     DeleteProductConfirmationDialogComponent,
     AddNewProductDialogComponent,
     EditProductDialogComponent,
+    OperatorViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,7 +92,8 @@ import { EditProductDialogComponent } from './components/edit-product-dialog/edi
     MatDividerModule,
     MatChipsModule,
     MatPaginatorModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]
