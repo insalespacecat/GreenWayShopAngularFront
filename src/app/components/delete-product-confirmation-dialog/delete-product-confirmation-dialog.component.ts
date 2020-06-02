@@ -21,7 +21,7 @@ export class DeleteProductConfirmationDialogComponent implements OnInit {
   close(answer) {
     if(answer == true){
       this.productService.deleteProduct(this.productInfo.id).subscribe(res => {});
-      this.fileService.delete(this.productInfo.name);
+      this.fileService.delete(this.productInfo.name).subscribe(res => {});
     }
     this.dialogRef.close();
   }
