@@ -5,11 +5,25 @@ import {CartService} from "../../services/cart.service";
 import {MatDialog} from "@angular/material/dialog";
 import {DeleteProductConfirmationDialogComponent} from "../delete-product-confirmation-dialog/delete-product-confirmation-dialog.component";
 import {AddNewProductDialogComponent} from "../add-new-product-dialog/add-new-product-dialog.component";
+import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-manage-products',
   templateUrl: './manage-products.component.html',
-  styleUrls: ['./manage-products.component.css']
+  styleUrls: ['./manage-products.component.css'],
+  animations: [
+    trigger('fade',
+      [
+        transition('* => void', [
+          style({opacity: 0}),
+          animate(150)
+        ]),
+        transition('void => *',[
+          style({opacity: 0}),
+          animate(150)
+        ])
+      ])
+  ]
 })
 export class ManageProductsComponent implements OnInit {
 

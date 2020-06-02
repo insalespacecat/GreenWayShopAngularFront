@@ -13,6 +13,19 @@ import {LogoutConfirmationDialogComponent} from '../logout-confirmation-dialog/l
   selector: 'app-navigation-bar',
   templateUrl: './navigation-bar.component.html',
   styleUrls: ['./navigation-bar.component.css'],
+  animations: [
+    trigger('fade',
+      [
+        transition('* => void', [
+          style({opacity: 0}),
+          animate(400)
+        ]),
+        transition('void => *',[
+          style({opacity: 0}),
+          animate(400)
+        ])
+      ])
+    ]
 })
 export class NavigationBarComponent {
 

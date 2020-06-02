@@ -3,11 +3,25 @@ import {ProductInterface} from '../../interfaces/product-interface';
 import {CartItemInterface} from '../../interfaces/cart-item-interface';
 import {CartService} from "../../services/cart.service";
 import {AuthService} from "../../services/auth.service";
+import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
-  styleUrls: ['./product-card.component.css']
+  styleUrls: ['./product-card.component.css'],
+  animations: [
+    trigger('fade',
+      [
+        transition('* => void', [
+          style({opacity: 0}),
+          animate(400)
+        ]),
+        transition('void => *', [
+          style({opacity: 0}),
+          animate(400)]
+        )
+      ])
+  ]
 })
 export class ProductCardComponent {
 

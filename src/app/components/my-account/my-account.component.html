@@ -1,7 +1,7 @@
-<mat-card *ngIf="!userInfo">
+<mat-card *ngIf="!userInfo" @fade>
 <h3>Please refresh the page after login to see your account info!</h3>
 </mat-card>
-<mat-grid-list class="productGrid" cols="4" *ngIf="userInfo">
+<mat-grid-list class="productGrid" cols="4" *ngIf="userInfo" @fade>
   <mat-grid-tile-header>
     <mat-card class="welcomeHeader"><h1>Welcome, {{userInfo.name}}!</h1></mat-card>
   </mat-grid-tile-header>

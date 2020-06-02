@@ -11,13 +11,14 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   animations: [
     trigger('fade',
       [
-        state( 'shown', style({opacity: 1})),
-        state( 'hidden', style({opacity: 0})),
-        transition('shown => hidden', [
-          animate(200)
+        transition('* => void', [
+          style({opacity: 0}),
+          animate(400)
         ]),
-        transition('hidden => shown',
-          animate(200))
+        transition('void => *',[
+          style({opacity: 0}),
+          animate(400)
+        ])
       ])
   ]
 })

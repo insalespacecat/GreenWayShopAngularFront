@@ -10,11 +10,25 @@ import {ItemsPerOrderDialogComponent} from "../items-per-order-dialog/items-per-
 import {CartItemInterface} from "../../interfaces/cart-item-interface";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
+import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-my-account',
   templateUrl: './my-account.component.html',
-  styleUrls: ['./my-account.component.css']
+  styleUrls: ['./my-account.component.css'],
+  animations: [
+    trigger('fade',
+      [
+        transition('* => void', [
+          style({opacity: 0}),
+          animate(400)
+        ]),
+        transition('void => *',[
+          style({opacity: 0}),
+          animate(400)
+        ])
+      ])
+  ]
 })
 export class MyAccountComponent implements OnInit {
   userInfo: UserInterface;

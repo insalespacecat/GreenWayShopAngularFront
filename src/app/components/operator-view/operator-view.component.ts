@@ -6,11 +6,25 @@ import {CartItemInterface} from "../../interfaces/cart-item-interface";
 import {ItemsPerOrderDialogComponent} from "../items-per-order-dialog/items-per-order-dialog.component";
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
+import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-operator-view',
   templateUrl: './operator-view.component.html',
-  styleUrls: ['./operator-view.component.css']
+  styleUrls: ['./operator-view.component.css'],
+  animations: [
+    trigger('fade',
+      [
+        transition('* => void', [
+          style({opacity: 0}),
+          animate(150)
+        ]),
+        transition('void => *',[
+          style({opacity: 0}),
+          animate(150)
+        ])
+      ])
+  ]
 })
 export class OperatorViewComponent implements OnInit {
 

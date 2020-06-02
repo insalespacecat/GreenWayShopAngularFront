@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card @fade>
   <mat-card-content>
     <h1>ADMIN MODE</h1>
   </mat-card-content>
@@ -6,7 +6,7 @@
     <button mat-raised-button (click)="disableAdminMode()" [routerLink]="['']">Go back to shop</button>
   </mat-card-actions>
 </mat-card>
-<mat-grid-list class="optionsGrid" cols="4" rowHeight="1:2">
+<mat-grid-list class="optionsGrid" cols="4" rowHeight="1:2" @fade>
   <mat-grid-tile-header>
     <button mat-raised-button class="adminMenuButtons" color="primary" [routerLink]="['admin/manageProducts']">
       Manage products <br/>

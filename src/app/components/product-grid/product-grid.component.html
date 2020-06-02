@@ -1,5 +1,5 @@
 <br/>
-<mat-grid-list class="productGrid" cols="5" rowHeight="1:1.5">
+<mat-grid-list class="productGrid" cols="5" rowHeight="1:1.5" @fade>
 
   <mat-grid-tile class="cartTile">
     <div class="Cart">
@@ -8,21 +8,7 @@
       </app-cart>
     </div>
   </mat-grid-tile>
-
   <mat-grid-tile *ngFor="let productInfo of productInfoList">
-    <app-product-card [productInfo]="productInfo" (syncCartContent)="triggerSyncInCartContent()"></app-product-card>
+    <app-product-card [productInfo]="productInfo"></app-product-card>
   </mat-grid-tile>
-
-  <mat-grid-tile></mat-grid-tile>
-  <mat-grid-tile></mat-grid-tile>
-
-  <mat-grid-tile *ngFor="let productInfo of productInfoList">
-    <app-product-card [productInfo]="productInfo" (syncCartContent)="triggerSyncInCartContent()"></app-product-card>
-  </mat-grid-tile>
-  <mat-grid-tile></mat-grid-tile>
-  <mat-grid-tile></mat-grid-tile>
-  <mat-grid-tile *ngFor="let productInfo of productInfoList">
-    <app-product-card [productInfo]="productInfo" (syncCartContent)="triggerSyncInCartContent()"></app-product-card>
-  </mat-grid-tile>
-  <mat-grid-tile></mat-grid-tile>
 </mat-grid-list>
