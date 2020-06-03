@@ -44,16 +44,8 @@ export class MyAccountComponent implements OnInit {
   displayedColumns: string[] = ['id', 'total', 'items'];
   constructor(private authService: AuthService, private orderService: OrderService, private dialog: MatDialog) {
     console.log('user info in authService is: ' + JSON.stringify(authService.getUserInfoFromSessionStorage()));
-    this.userInfo = authService.getUserInfoFromSessionStorage();
+    //this.userInfo = authService.getUserInfoFromSessionStorage();
   }
-  id: number;
-  items: Array<CartItemInterface>;
-  total: number;
-  name: string;
-  address: string;
-  phoneNumber: string;
-  paymentMethod: string;
-
   ngOnInit(): void {
     /*
     this.authService.loadUserInfoFromAPI();
