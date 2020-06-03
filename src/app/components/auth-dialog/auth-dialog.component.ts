@@ -19,6 +19,7 @@ export class AuthDialogComponent implements OnInit {
   phoneFormControl = new FormControl('', [Validators.required, Validators.pattern('^\\+375 \\((17|29|33|44|25)\\) [0-9]{3}-[0-9]{2}-[0-9]{2}$')]);
   nameFormControl = new FormControl('', [Validators.required, Validators.maxLength(30)]);
   addressFormControl = new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]);
+
   constructor(public dialogRef: MatDialogRef<AuthDialogComponent>, private authService: AuthService) {
   }
   usernameGetErrorMessage() {

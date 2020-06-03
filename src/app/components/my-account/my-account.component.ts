@@ -64,6 +64,6 @@ export class MyAccountComponent implements OnInit {
     const dialogConfig = {
       width: '250px',
     };
-    const orderDialogRef = this.dialog.open(AuthDialogComponent, dialogConfig);
+    //const orderDialogRef = this.dialog.open(AuthDialogComponent, dialogConfig);
   }
 }
