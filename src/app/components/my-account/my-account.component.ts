@@ -31,17 +31,31 @@ import {animate, style, transition, trigger} from "@angular/animations";
   ]
 })
 export class MyAccountComponent implements OnInit {
-  userInfo: UserInterface;
-  orders: Array<OrderInterface> = null;
+  userInfo: UserInterface = {username: "alexandraSav", name: "Alexandra", authorities: "USER", active: true,
+    phoneNumber: "+375 (33) 123-12-31", discount: 5, shippingAddress: "Minsk, ul Lenina 15, kv 34"};
+  orders: Array<OrderInterface> =
+    [{id: 74, paymentMethod: "creditCard", total: 45, user: null, name: "Alexandra", address: "Minsk, ul Lenina 15, kv 34",
+    phoneNumber: "+375 (33) 123-12-31", items: [{name: "Green tea", quantity: 3, price: 15, id: 4}] },
+      {id: 125, paymentMethod: "creditCard", total: 80, user: null, name: "Alexandra", address: "Minsk, ul Lenina 15, kv 34",
+        phoneNumber: "+375 (33) 123-12-31", items: [{name: "Green tea", quantity: 3, price: 15, id: 4}, {name: "Aloe Vera plant",
+        id: 12, price: 17.5, quantity: 2}] }];
+
   ordersDataSource;
   displayedColumns: string[] = ['id', 'total', 'items'];
   constructor(private authService: AuthService, private orderService: OrderService, private dialog: MatDialog) {
     console.log('user info in authService is: ' + JSON.stringify(authService.getUserInfoFromSessionStorage()));
     this.userInfo = authService.getUserInfoFromSessionStorage();
   }
-
+  id: number;
+  items: Array<CartItemInterface>;
+  total: number;
+  name: string;
+  address: string;
+  phoneNumber: string;
+  paymentMethod: string;
 
   ngOnInit(): void {
+    /*
     this.authService.loadUserInfoFromAPI();
     this.userInfo = this.authService.getUserInfoFromSessionStorage();
     console.log('user info is' + JSON.stringify(this.userInfo));
@@ -50,6 +64,7 @@ export class MyAccountComponent implements OnInit {
     } else {
       this.orderService.getAllOrdersByUsername(this.userInfo.username).subscribe(res => this.orders = res);
     }
+     */
   }
 
   openItemsDialog(items: Array<CartItemInterface>): void {
