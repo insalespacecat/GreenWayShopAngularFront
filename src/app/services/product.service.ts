@@ -7,16 +7,12 @@ import {ProductInterface} from '../interfaces/product-interface';
 })
 export class ProductService {
 
-  hostURL = 'https://localhost:8443/query/';
-  private headers = new HttpHeaders({
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-    'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
-  });
+  hostURL = 'https://greenway-backend.herokuapp.com/query/';
+
   constructor(private http: HttpClient) { }
 
   getProducts() {
-    return this.http.get<Array<ProductInterface>>(this.hostURL + 'getProducts', {headers: this.headers, withCredentials: true});
+    return this.http.get<Array<ProductInterface>>(this.hostURL + 'getProducts', {withCredentials: true});
   }
   addProduct(productToPost: ProductInterface) {
     return this.http.post(this.hostURL + 'addProduct', productToPost);

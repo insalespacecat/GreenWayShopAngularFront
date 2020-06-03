@@ -10,8 +10,7 @@ export class CartService {
   private cart: Array<CartItemInterface> = [];
   cartTotalPrice = 0;
   itemIndex: number;
-  cartAPIURL = 'https://localhost:8443/cart';
-  cartAPIAuthenticated = 'https://localhost:8443/authenticated/cart';
+  cartAPIURL = 'https://greenway-backend.herokuapp.com/cart';
   postSyncResult: any;
   firstProductExists = false;
   constructor(private http: HttpClient) { }
