@@ -42,6 +42,9 @@ export class MyAccountComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.authService.loadUserInfoFromAPI();
+    this.userInfo = this.authService.getUserInfoFromSessionStorage();
+    console.log('user info is' + JSON.stringify(this.userInfo));
     if(!this.userInfo) {
       this.openAuthDialog();
     } else {
