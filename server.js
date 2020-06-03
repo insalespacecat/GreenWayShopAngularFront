@@ -3,9 +3,9 @@ const http = require('http');
 const path = require('path');
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'dist/EmployeeInfoTable')));
+app.use(express.static(path.join(__dirname, 'dist/GreenWayShop')));
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/EmployeeInfoTable/index.html'));
+  res.sendFile(path.join(__dirname, 'dist/GreenWayShop/index.html'));
 });
 
 const port = process.env.PORT || 8080;
