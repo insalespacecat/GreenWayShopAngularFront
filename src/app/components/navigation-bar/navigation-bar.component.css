@@ -1,16 +1,23 @@
 .toolbar{
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  height: fit-content!important;
 }
+
 .navButton{
-  margin: 33px;
-  width: 200px;
+  width: 10rem;
+  margin: 0.7rem 2rem;
 }
+
+.authButton{
+  margin: 0.7rem 0;
+}
+
 .headerImage{
-  height: 240px;
-  width: 800px;
-}
-.matCardHeader{
   display: flex;
-  justify-content: center;
+  height: 25%;
+  width: 70%;
+  margin: auto;
 }
+
