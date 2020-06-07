@@ -1,17 +1,23 @@
 .cartMatCard{
-  width: 260px;
-  height: 350px;
   display: flex;
+  width: 250px;
+  height: 230px;
+  overflow-x: hidden;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
   flex-direction: column;
 }
-.cartMatCardActions{
-  display: flex;
-  justify-content: center;
-  align-content: center;
-}
-.total {
-  display: flex;
-  justify-content: center;
-  align-content: center;
+@media (max-width: 400px){
+  .cartMatCard{
+    display: flex;
+    width: 250px;
+    height: 340px;
+    overflow-x: hidden;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+  }
 }
 

@@ -1,20 +1,37 @@
+.flex-cont{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .welcomeHeader{
   display: flex;
   justify-content: center;
-  align-content: center;
 }
-.userInfo{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-}
-.ordersTableCard{
-  width: 80%;
-  max-height: 300px;
-  overflow-y: auto;
-}
-table {
-  width: 100%;
 
+.ordersTableCard{
+  margin: 2rem 5rem;
 }
+
+.ordersMatTable {
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  height: 270px !important;
+}
+
+mat-table {
+  width: 100%;
+}
+
+@media (max-width: 400px) {
+  .flex-cont{
+    flex-direction: column;
+  }
+  .userInfoCard {
+    margin: 2rem 0 0 0;
+  }
+}
+
+
+

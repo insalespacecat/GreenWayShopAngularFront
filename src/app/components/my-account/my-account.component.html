@@ -1,60 +1,56 @@
-<mat-card @fade>
-<h3>Session functionality is not available in heroku demo! Showing view example...</h3>
+<mat-card *ngIf="!userInfo" @fade>
+  <h3>Please refresh the page after login to see your account info!</h3>
 </mat-card>
-<mat-grid-list class="productGrid" cols="4" @fade>
-  <mat-grid-tile-header>
-    <mat-card class="welcomeHeader"><h1>Welcome, {{userInfo.name}}!</h1></mat-card>
-  </mat-grid-tile-header>
-  <mat-grid-tile>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <mat-card>
-      <mat-card-header>
-        <h2>Your info:</h2>
-      </mat-card-header>
-      <mat-card-content>
-        <mat-card class="userInfo">
-          <h4><b>username:</b> {{userInfo.username}}</h4>
-          <h4><b>phone number:</b> {{userInfo.phoneNumber}}</h4>
-          <h4><b>shipping address:</b> {{userInfo.shippingAddress}}</h4>
-        </mat-card>
-      </mat-card-content>
-      <mat-card-footer><mat-card class="welcomeHeader"><h3>Your personal discount: {{userInfo.discount}}%</h3></mat-card></mat-card-footer>
-    </mat-card>
-  </mat-grid-tile>
-  <mat-grid-tile class="orders">
-    <mat-card *ngIf="!orders">
-      <mat-card-header>
-        <h2>Your orders</h2>
-      </mat-card-header>
-      <mat-card-content>
-        <h3> Looks like you don't have any orders yet!</h3>
-      </mat-card-content>
-    </mat-card>
-    <mat-card *ngIf="orders" class="ordersTableCard">
-      <mat-card-header>
-        <h2>Your orders</h2>
-      </mat-card-header>
-      <mat-card-content>
-        <table mat-table [dataSource]="orders" >
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> ID </th>
-            <td mat-cell *matCellDef="let order"> {{order.id}} </td>
-          </ng-container>
-          <ng-container matColumnDef="total">
-            <th mat-header-cell *matHeaderCellDef> Total </th>
-            <td mat-cell *matCellDef="let order"> {{order.total | currency: 'USD' : 'symbol' : '.2'}} </td>
-          </ng-container>
-          <ng-container matColumnDef="items">
-            <th mat-header-cell *matHeaderCellDef> Items </th>
-            <td mat-cell *matCellDef="let order"> <button mat-raised-button><mat-icon matSuffix (click)="openItemsDialog(order.items)">remove_red_eye</mat-icon></button></td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-      </mat-card-content>
-    </mat-card>
-  </mat-grid-tile>
-  <mat-grid-tile>
-  </mat-grid-tile>
-</mat-grid-list>
+<mat-card class="welcomeHeader">
+  <h1 class="welcomeMessage">Welcome, {{userInfo.name}}!</h1>
+</mat-card>
+<div class="flex-cont">
+  <mat-card class="userInfoCard">
+    <mat-card-header>
+      <h2>Your info:</h2>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-card class="userInfoHolder">
+        <h4><b>username:</b> {{userInfo.username}}</h4>
+        <h4><b>phone number:</b> {{userInfo.phoneNumber}}</h4>
+        <h4><b>shipping address:</b> {{userInfo.shippingAddress}}</h4>
+      </mat-card>
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-card class="personalDiscount">
+        <h3>Your personal discount: {{userInfo.discount}}%</h3>
+      </mat-card>
+    </mat-card-footer>
+  </mat-card>
+  <mat-card *ngIf="!orders">
+    <mat-card-header>
+      <h2>Your orders</h2>
+    </mat-card-header>
+    <mat-card-content>
+      <h3> Looks like you don't have any orders yet!</h3>
+    </mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="orders" class="ordersTableCard">
+    <mat-card-header>
+      <h2>Your orders</h2>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-table [dataSource]="orders" class="ordersMatTable">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let order"> {{order.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="total">
+          <th mat-header-cell *matHeaderCellDef> Total </th>
+          <td mat-cell *matCellDef="let order"> {{order.total | currency: 'USD' : 'symbol' : '.2'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="items">
+          <th mat-header-cell *matHeaderCellDef> Items </th>
+          <td mat-cell *matCellDef="let order"> <button mat-raised-button><mat-icon matSuffix (click)="openItemsDialog(order.items)">remove_red_eye</mat-icon></button></td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </mat-table>
+    </mat-card-content>
+  </mat-card>
+</div>

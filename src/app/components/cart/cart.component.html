@@ -1,11 +1,9 @@
 <mat-card class="cartMatCard">
-  <mat-card-header>
-    <h2>Your cart</h2>
-  </mat-card-header>
+  <h2>Your cart</h2>
   <mat-card-content class="cartMatCardContent">
-  <ng-content></ng-content>
-    <h3 class="total"> Total: {{total | currency: 'USD' : 'symbol' : '.2'}}</h3>
+    <ng-content></ng-content>
   </mat-card-content>
+  <h3 class="total"> Total: {{total | currency: 'USD' : 'symbol' : '.2'}}</h3>
   <mat-card-actions class="cartMatCardActions">
     <button mat-raised-button class="orderButton" color="primary" (click)="openOrderDialog()">Order</button>
   </mat-card-actions>

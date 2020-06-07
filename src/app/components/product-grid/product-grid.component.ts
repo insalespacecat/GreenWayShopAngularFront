@@ -23,12 +23,25 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   ]
 })
 export class ProductGridComponent implements OnInit, DoCheck {
+  breakpoint;
+  adaptiveRowHeight;
   productInfoList: Array<ProductInterface>;
   cartHidden = true;
   constructor(private productService: ProductService, private cartService: CartService) { }
   hideShowCart() {
     this.cartHidden = !this.cartHidden;
   }
+
+  displayMobileCart() {
+    return (window.innerWidth <= 400);
+  }
+
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 3;
+    this.adaptiveRowHeight = (window.innerWidth <= 400) ? '1:1' : '1:1.5';
+    console.log(JSON.stringify(this.adaptiveRowHeight));
+  }
+
   ngDoCheck(): void {
     if (this.cartService.firstProductAdded()) {
       console.log('First product added');
@@ -36,6 +49,9 @@ export class ProductGridComponent implements OnInit, DoCheck {
     }
   }
   ngOnInit(): void {
+    this.breakpoint = (window.innerWidth <= 400) ? 1 : 3;
+    this.adaptiveRowHeight = (window.innerWidth <= 400) ? '1:1' : '1:1.5';
+    console.log(JSON.stringify(this.adaptiveRowHeight));
     this.productService.getProducts().subscribe(res => this.productInfoList = res);
     if (this.cartService.hasProducts()) {
       console.log('Cart has products');

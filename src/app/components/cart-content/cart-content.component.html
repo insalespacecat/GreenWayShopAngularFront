@@ -11,8 +11,8 @@
   <ng-container matColumnDef="deleteButtons" @fade>
     <td mat-cell class="deleteButton" *matCellDef="let item">
       <button mat-icon-button class="deleteButton" (click)="deleteItem(item)">
-      <mat-icon class="deleteIcon">close</mat-icon>
-    </button>
+        <mat-icon class="deleteIcon">close</mat-icon>
+      </button>
     </td>
   </ng-container>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;" @fade></tr>

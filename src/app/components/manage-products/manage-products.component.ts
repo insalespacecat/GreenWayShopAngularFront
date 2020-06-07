@@ -27,9 +27,17 @@ import {animate, style, transition, trigger} from "@angular/animations";
 })
 export class ManageProductsComponent implements OnInit {
 
+  breakpoint;
+  adaptiveRowHeight;
   productInfoList: Array<ProductInterface>;
 
   constructor(private productService: ProductService, private dialog: MatDialog) { }
+
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 3;
+    this.adaptiveRowHeight = (window.innerWidth <= 400) ? '1:1' : '1:1.5';
+    console.log(JSON.stringify(this.adaptiveRowHeight));
+  }
 
   openNewProductDialog(){
     const dialogConfig = {
@@ -39,6 +47,8 @@ export class ManageProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.breakpoint = (window.innerWidth <= 400) ? 1 : 3;
+    this.adaptiveRowHeight = (window.innerWidth <= 400) ? '1:1' : '1:1.5';
     this.productService.getProducts().subscribe(res => this.productInfoList = res);
   }
 }

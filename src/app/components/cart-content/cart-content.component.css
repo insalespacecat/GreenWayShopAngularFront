@@ -1,8 +1,9 @@
 .cartContentTable{
   display: flex;
-  height: 210px;
-  width: inherit;
+  height: 100px;
+  width: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 .mat-column-itemName{
   flex: 0 0 100px;
@@ -21,3 +22,8 @@
   font-size:10px !important;
 }
 
+@media (max-width: 400px){
+  .cartContentTable{
+    height: 200px;
+  }
+}

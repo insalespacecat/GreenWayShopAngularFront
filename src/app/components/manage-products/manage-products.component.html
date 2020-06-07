@@ -1,10 +1,9 @@
-<mat-grid-list cols="5" rowHeight="1:1.5" @fade>
-  <br/>
-  <mat-grid-tile-header>
-    <button mat-raised-button class="newProductButton" color = "accent" (click)="openNewProductDialog()">Add new product</button>
-  </mat-grid-tile-header>
-  <mat-grid-tile></mat-grid-tile>
-  <mat-grid-tile *ngFor="let productInfo of productInfoList">
+<br/>
+<div class="newProductButtonHolder">
+  <button mat-raised-button class="newProductButton" color = "accent" (click)="openNewProductDialog()">Add new product</button>
+</div>
+<mat-grid-list class="productGrid" [cols]="breakpoint" [rowHeight]="adaptiveRowHeight" gutterSize="50px" @fade (window:resize)="onResize($event)">
+  <mat-grid-tile *ngFor="let productInfo of productInfoList" class="productTile">
     <app-product-card-admin-edit [productInfo]="productInfo"></app-product-card-admin-edit>
   </mat-grid-tile>
 </mat-grid-list>

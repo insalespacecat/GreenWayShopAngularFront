@@ -1,8 +1,29 @@
-mat-grid-tile-header{
+.newProductButtonHolder{
   display: flex;
   justify-content: center;
-  align-content: center;
 }
 .newProductButton{
   width: 60%;
 }
+.productGrid{
+  margin: 5rem 17rem!important;
+}
+
+.productTile{
+  width: 100%;
+  padding: 2rem;
+}
+@media (max-width: 1000px) {
+  .productGrid{
+    margin: 0 0 0 0!important;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  .productTile{
+    padding: 1rem 0;
+    width: fit-content;
+  }
+}
+
+

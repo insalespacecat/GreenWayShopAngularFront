@@ -20,4 +20,25 @@
   width: 70%;
   margin: auto;
 }
+.mobileHeaderImage{
+  display: none;
+}
+
+@media (max-width: 400px) {
+  .toolbar{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: fit-content!important;
+  }
+  .headerImage{
+    display: none;
+  }
+  .mobileHeaderImage{
+    display: flex;
+    height: 60%;
+    width: 100%;
+  }
+}
 

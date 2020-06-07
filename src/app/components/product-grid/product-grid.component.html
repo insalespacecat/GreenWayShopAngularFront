@@ -1,14 +1,18 @@
-<br/>
-<mat-grid-list class="productGrid" cols="5" rowHeight="1:1.5" @fade>
-
-  <mat-grid-tile class="cartTile">
-    <div class="Cart">
+<div class="cartDesktop" *ngIf="!displayMobileCart()">
+  <app-cart>
+    <app-cart-content></app-cart-content>
+  </app-cart>
+</div>
+<mat-grid-list class="productGrid" [cols]="breakpoint" [rowHeight]="adaptiveRowHeight" gutterSize="50px" @fade (window:resize)="onResize($event)">
+  <mat-grid-tile class="cartMobile" *ngIf="displayMobileCart()">
+    <div class="cart">
       <app-cart>
         <app-cart-content></app-cart-content>
       </app-cart>
     </div>
   </mat-grid-tile>
-  <mat-grid-tile *ngFor="let productInfo of productInfoList">
+  <mat-grid-tile *ngFor="let productInfo of productInfoList" class="productTile">
     <app-product-card [productInfo]="productInfo"></app-product-card>
   </mat-grid-tile>
 </mat-grid-list>
+
