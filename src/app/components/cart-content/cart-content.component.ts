@@ -2,7 +2,7 @@ import {Component, DoCheck, OnInit} from '@angular/core';
 import {ProductInterface} from '../../interfaces/product-interface';
 import {CartService} from '../../services/cart.service';
 import {CartItemInterface} from '../../interfaces/cart-item-interface';
-import {animate, style, transition, trigger} from "@angular/animations";
+import {animate, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-cart-content',
@@ -32,10 +32,9 @@ export class CartContentComponent implements OnInit, DoCheck {
     this.cartBody = this.cartService.get();
   }
   ngOnInit(): void {
-    this.cartService.getSync();
+    this.cartService.getCartFromSessionStorage();
     this.cartBody = this.cartService.get();
   }
-
   ngDoCheck(): void {
     this.cartBody = this.cartService.get();
     console.log(JSON.stringify(this.cartBody));

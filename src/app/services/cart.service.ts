@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {ProductInterface} from '../interfaces/product-interface';
 import {CartItemInterface} from '../interfaces/cart-item-interface';
 import {HttpClient} from '@angular/common/http';
 
@@ -10,7 +9,7 @@ export class CartService {
   private cart: Array<CartItemInterface> = [];
   cartTotalPrice = 0;
   itemIndex: number;
-  cartAPIURL = 'https://greenway-backend.herokuapp.com/cart';
+  cartAPIURL = 'https://localhost:8443/cart';
   postSyncResult: any;
   firstProductExists = false;
   constructor(private http: HttpClient) { }
@@ -44,6 +43,7 @@ export class CartService {
       this.cart.push(cartItem);
     }
     this.itemIndex = null;
+    this.syncCartWithSessionStorage();
     this.postSync();
     return this.get();
   }
@@ -53,11 +53,23 @@ export class CartService {
   remove(index: number) {
     this.cart.splice(index, 1);
     this.patchSync();
+    this.syncCartWithSessionStorage();
     if (this.cart.length === 0) {
       this.firstProductExists = false;
     }
     return this.get();
   }
+
+  syncCartWithSessionStorage(){
+    sessionStorage.setItem('cart', JSON.stringify(this.cart));
+  }
+  getCartFromSessionStorage(){
+    this.cart = JSON.parse(sessionStorage.getItem('cart'));
+  }
+  clearCartFromSessionStorage(){
+    sessionStorage.setItem('cart', JSON.stringify([]));
+  }
+
   postSync() {
     return this.http.post(this.cartAPIURL + '/syncPost', this.cart, {withCredentials: true})
       .subscribe(res => this.postSyncResult = res);

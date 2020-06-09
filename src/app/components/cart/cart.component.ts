@@ -46,6 +46,7 @@ export class CartComponent implements DoCheck {
             }
           );
           this.cartService.deleteSync();
+          this.cartService.clearCartFromSessionStorage();
           this.info = {
             id: null, name: null, items: null, paymentMethod: null, address: null, phoneNumber: null,
             total: null, user: this.authService.user
