@@ -15,7 +15,9 @@ export class CartService {
   constructor(private http: HttpClient) { }
   getTotalPrice() {
     this.cartTotalPrice = 0;
-    this.cart.forEach(item => { this.cartTotalPrice += item.price; });
+    if (!(this.cart == null)) {
+      this.cart.forEach(item => { this.cartTotalPrice += item.price; });
+    }
     return this.cartTotalPrice;
   }
   firstProductAdded() {
