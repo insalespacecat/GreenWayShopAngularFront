@@ -50,7 +50,11 @@ export class CartService {
     return this.get();
   }
   get() {
+    if(!(this.cart == null)){
     return this.cart.slice();
+    } else {
+      return [];
+    }
   }
   remove(index: number) {
     this.cart.splice(index, 1);
