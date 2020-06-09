@@ -67,10 +67,16 @@ export class CartService {
   }
 
   syncCartWithSessionStorage(){
+    if(this.cart == null){
+      this.cart = [];
+    }
     sessionStorage.setItem('cart', JSON.stringify(this.cart));
   }
   getCartFromSessionStorage(){
     this.cart = JSON.parse(sessionStorage.getItem('cart'));
+    if(this.cart == null){
+      this.cart = [];
+    }
   }
   clearCartFromSessionStorage(){
     sessionStorage.setItem('cart', JSON.stringify([]));
