@@ -13,7 +13,7 @@ export class FileService {
   upload(file: File, filename: string){
     let formData = new FormData();
     formData.append("file", file, filename + ".jpg");
-    return this.http.post(this.imageUploadApi + '/upload', formData);
+    return this.http.post(this.imageUploadApi + '/upload' + '/' + filename, formData);
   }
 
   get(filename: string){
