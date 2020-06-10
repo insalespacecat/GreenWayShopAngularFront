@@ -12,7 +12,7 @@ export class AuthService {
   user: UserInterface = null;
   isAuthenticated: boolean;
   token: string;
-  APIURL = 'https://localhost:8443';
+  APIURL = 'https://greenway-backend.herokuapp.com';
   constructor(private http: HttpClient) {
     if (this.getAuthenticationStatus()) {
       this.user = JSON.parse(localStorage.getItem('UserInfo'));

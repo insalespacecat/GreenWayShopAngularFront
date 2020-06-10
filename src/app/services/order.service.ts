@@ -6,7 +6,7 @@ import {OrderInterface} from '../interfaces/order-interface';
   providedIn: 'root'
 })
 export class OrderService {
-  OrderAPIURL = 'https://localhost:8443/order';
+  OrderAPIURL = 'https://greenway-backend.herokuapp.com/order';
   token: string;
   private headers;
   constructor(private http: HttpClient) {

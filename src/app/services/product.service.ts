@@ -7,7 +7,7 @@ import {ProductInterface} from '../interfaces/product-interface';
 })
 export class ProductService {
 
-  hostURL = 'https://localhost:8443/query/';
+  hostURL = 'https://greenway-backend.herokuapp.com/query/';
   token: string;
   private headers;
   constructor(private http: HttpClient) {

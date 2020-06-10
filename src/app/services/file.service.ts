@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class FileService {
 
-  imageUploadApi = 'https://localhost:8443/images';
+  imageUploadApi = 'https://greenway-backend.herokuapp.com/images';
 
   constructor(private http: HttpClient) { }
 
