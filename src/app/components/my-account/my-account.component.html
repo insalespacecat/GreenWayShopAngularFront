@@ -1,10 +1,11 @@
-<mat-card *ngIf="!userInfo" @fade>
-  <h3>Please refresh the page after login to see your account info!</h3>
+<mat-card *ngIf="!userInfo.username" @fade>
+  <h3>Looks like you are not in your account! Do you want to login or sign up? </h3>
+  <button mat-raised-button color="primary" (click)="openAuthDialog()">Yes, get me to it</button>
 </mat-card>
-<mat-card class="welcomeHeader">
+<mat-card class="welcomeHeader" *ngIf="userInfo.username">
   <h1 class="welcomeMessage">Welcome, {{userInfo.name}}!</h1>
 </mat-card>
-<div class="flex-cont">
+<div class="flex-cont" *ngIf="userInfo.username">
   <mat-card class="userInfoCard">
     <mat-card-header>
       <h2>Your info:</h2>

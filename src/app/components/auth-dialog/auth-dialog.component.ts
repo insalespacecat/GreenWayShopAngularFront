@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {RegistrationFormInterface} from '../../interfaces/registration-form-interface';
 import {AuthService} from '../../services/auth.service';
 import {LoginFormInterface} from '../../interfaces/login-form-interface';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-auth-dialog',
@@ -19,8 +20,7 @@ export class AuthDialogComponent implements OnInit {
   phoneFormControl = new FormControl('', [Validators.required, Validators.pattern('^\\+375 \\((17|29|33|44|25)\\) [0-9]{3}-[0-9]{2}-[0-9]{2}$')]);
   nameFormControl = new FormControl('', [Validators.required, Validators.maxLength(30)]);
   addressFormControl = new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]);
-
-  constructor(public dialogRef: MatDialogRef<AuthDialogComponent>, private authService: AuthService) {
+  constructor(public dialogRef: MatDialogRef<AuthDialogComponent>, private authService: AuthService, private router: Router) {
   }
   usernameGetErrorMessage() {
     if (this.usernameFormControl.hasError('required')) {
@@ -70,7 +70,7 @@ export class AuthDialogComponent implements OnInit {
     this.dialogRef.close();
   }
   getAuthenticationStatus() {
-    return this.authService.getLoginStatusFromSessionStorage();
+    return this.authService.getAuthenticationStatus();
   }
   loginError() {
     return this.showLoginErrorMessage;
@@ -85,6 +85,7 @@ export class AuthDialogComponent implements OnInit {
       this.showLoginErrorMessage = false;
       this.dialogRef.close();
     }
+    this.router.navigateByUrl('/');
     this.dialogRef.close();
   }
   ngOnInit(): void {

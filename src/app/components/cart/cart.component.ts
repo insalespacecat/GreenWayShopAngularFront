@@ -7,13 +7,14 @@ import {OrderInterface} from '../../interfaces/order-interface';
 import {OrderService} from '../../services/order.service';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
+import {UserInterface} from '../../interfaces/user-interface';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent implements DoCheck {
+export class CartComponent implements OnInit, DoCheck {
 
   total = 0;
   info: OrderInterface = {id: null, name: null, items: null, paymentMethod: null, address: null, phoneNumber: null,
@@ -26,6 +27,17 @@ export class CartComponent implements DoCheck {
   constructor(public cartService: CartService, private orderService: OrderService,  private orderDialog: MatDialog,
               private router: Router, private authService: AuthService) {
   }
+  ngDoCheck(): void {
+    this.total = this.cartService.getTotalPrice();
+    if (this.authService.getAuthenticationStatus()) {
+      //this.discount = this.authService.getUserInfoFromSessionStorage().discount;
+      this.discount = 5;
+    }
+  }
+  ngOnInit(): void {
+    this.authService.loadUserInfoFromAPI().subscribe(res => this.info.user = res);
+  }
+
   openOrderDialog(): void {
     this.info.items = this.cartService.get();
     this.info.total  = this.cartService.getTotalPrice();
@@ -46,7 +58,6 @@ export class CartComponent implements DoCheck {
             }
           );
           this.cartService.deleteSync();
-          this.cartService.clearCartFromSessionStorage();
           this.info = {
             id: null, name: null, items: null, paymentMethod: null, address: null, phoneNumber: null,
             total: null, user: this.authService.user
@@ -56,6 +67,7 @@ export class CartComponent implements DoCheck {
       });
     }
   }
+
   discountPresented() {
     return this.discount !== null;
   }
@@ -69,11 +81,5 @@ export class CartComponent implements DoCheck {
   getDiscountInMoney() {
     return (this.total  / 100 * this.discount);
   }
-  ngDoCheck(): void {
-    this.total = this.cartService.getTotalPrice();
-    if (this.authService.getLoginStatusFromSessionStorage()) {
-      //this.discount = this.authService.getUserInfoFromSessionStorage().discount;
-      this.discount = 5;
-    }
-  }
+
 }

@@ -3,6 +3,9 @@
   justify-content: center;
   align-items: center;
 }
+.userInfoCard{
+  margin: 1rem 1rem;
+}
 
 
 .welcomeHeader{
@@ -24,14 +27,12 @@ mat-table {
   width: 100%;
 }
 
+
 @media (max-width: 400px) {
   .flex-cont{
     flex-direction: column;
   }
   .userInfoCard {
-    margin: 2rem 0 0 0;
+    margin: 2rem 2rem;
   }
 }
-
-
-
