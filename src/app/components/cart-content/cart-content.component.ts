@@ -32,7 +32,7 @@ export class CartContentComponent implements OnInit, DoCheck {
     this.cartBody = this.cartService.get();
   }
   ngOnInit(): void {
-    this.cartService.getCartFromSessionStorage();
+    this.cartService.getCartFromLocalStorage();
     this.cartBody = this.cartService.get();
   }
   ngDoCheck(): void {

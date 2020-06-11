@@ -45,7 +45,7 @@ export class CartService {
       this.cart.push(cartItem);
     }
     this.itemIndex = null;
-    this.syncCartWithSessionStorage();
+    this.syncCartWithLocalStorage();
     this.postSync();
     return this.get();
   }
@@ -59,27 +59,27 @@ export class CartService {
   remove(index: number) {
     this.cart.splice(index, 1);
     this.patchSync();
-    this.syncCartWithSessionStorage();
+    this.syncCartWithLocalStorage();
     if (this.cart.length === 0) {
       this.firstProductExists = false;
     }
     return this.get();
   }
 
-  syncCartWithSessionStorage(){
+  syncCartWithLocalStorage(){
     if(this.cart == null){
       this.cart = [];
     }
-    sessionStorage.setItem('cart', JSON.stringify(this.cart));
+    localStorage.setItem('cart', JSON.stringify(this.cart));
   }
-  getCartFromSessionStorage(){
-    this.cart = JSON.parse(sessionStorage.getItem('cart'));
+  getCartFromLocalStorage(){
+    this.cart = JSON.parse(localStorage.getItem('cart'));
     if(this.cart == null){
       this.cart = [];
     }
   }
-  clearCartFromSessionStorage(){
-    sessionStorage.setItem('cart', JSON.stringify([]));
+  clearCartFromLocalStorage(){
+    localStorage.setItem('cart', JSON.stringify([]));
   }
 
   postSync() {

@@ -58,6 +58,7 @@ export class CartComponent implements OnInit, DoCheck {
             }
           );
           this.cartService.deleteSync();
+          this.cartService.clearCartFromLocalStorage();
           this.info = {
             id: null, name: null, items: null, paymentMethod: null, address: null, phoneNumber: null,
             total: null, user: this.authService.user
